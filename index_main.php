@@ -8,7 +8,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
   $_SESSION["email"]=$_COOKIE["cookieUserEmail"];
 }
 ?>
-<!-- <fieldset disabled></fieldset> holaa desabilitar cualquier contenido -->
+<!-- <fieldset disabled></fieldset>   desabilitar cualquier contenido -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -18,7 +18,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>SportsOn alfa</title>
+    <title>SportsOn beta</title>
   </head>
   <body>
 
