@@ -23,10 +23,10 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
   <body>
 
     <header>
-      <nav class="navbar  navbar-expand-md bg-dark navbar-dark" role="navigation">
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark" role="navigation">
         
           <!-- Responsive -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
             <span class="navbar-toggler-icon"></span>
           </button>
             <!-- <a class="navbar-brand" href="#">
@@ -52,9 +52,10 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               <li class='nav-item'>
                 <a class='nav-link' href='registro.php'>Registro</a>
               </li>
-              </ul>
-                <ul class='navbar-nav navbar-right'>
-                  <li class='nav-item dropdown'>
+            </ul>
+            
+                <ul class='navbar-nav ml-auto'>
+                  <li class='nav-item'>
                     <a class='nav-link' href='inicioS.php'>
                       Inicia Sesion
                     </a>
@@ -64,7 +65,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               $nom =$_SESSION['nombreUser'];
               echo "
               </ul>
-                <ul class='navbar-nav navbar-right'>
+                <ul class='navbar-nav ml-auto'>
                   <li class='dropdown'>
                     <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown'>
                        $nom 
@@ -80,19 +81,125 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
           </div>
       </nav>
     </header>
-    <section class="jumbotron">
+    <!-- inicio de slider -->
+    <div id="slider1" class="carousel slide" data-ride="carousel">
+ <!-- ol es un numerador -->
+    <ol class="carousel-indicators">
+        <li data-target="#slider1" data-slide-to="0" class="active"></li>
+        <li data-target="#slider1" data-slide-to="1"></li>
+        <li data-target="#slider1" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="img/ppp.png" alt="First slide">
+          <div class="carousel-caption d-none d-md-block transbox">
+              <h5>Primer slide</h5>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+          <img class="d-block w-100" src="img/img_hebreo.jpg" alt="Second slide">
+          <div class="carousel-caption d-none d-md-block transbox">
+            <h5>segundo slide</h5>
+           
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <img class="d-block w-100" src="img/img_brasil.png" alt="Third slide">
+          <div class="carousel-caption d-none d-md-block transbox">
+            <h5>tercer slide</h5>
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- flecha indicadora de retroceso -->
+      <a class="carousel-control-prev" href="#slider1" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <!-- flecha indicadora de avance -->
+      <a class="carousel-control-next" href="#slider1" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <section class="jumbotron jumbotron1">
       <div class="container">
         <h1>bienvenido</h1> 
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
           </p>
         </div>
     </section>
-    <h1>Quenes Somos </h1>
-    <div class="container">
-      <p class="margin-b-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate nostrum reprehenderit incidunt quibusdam consequatur. Quis eius asperiores sed provident? Molestiae fugit eius eum ducimus sequi harum voluptatem ab quaerat commodi?
-      </p>
-    </div>
+
+ <div class="container">
+     <div class="card text-center">
+        <div class="card-body">
+            <h2 class="post-title">
+                <a href="#">Noticia o evento1</a>
+            </h2>
+            <p><span class="post-fecha"> 22 mayo 2018 </span> 
+                <span class="post-autor"><a href="#">Rainer Prueba</a></span>
+            </p>
+            <p class="post-contenido text-justify">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptas ea nisi impedit ipsa cum.
+                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
+                et odit ipsa voluptates autem ex possimus.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptas ea nisi impedit ipsa cum.
+                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
+                et odit ipsa voluptates autem ex possimus.
+                
+            </p>
+            <form action="horas.php" method="post" role="form">
+                <div class="contenedor-botones">
+                    <a href="#" class="btn btn-success">Leer mas</a>
+                </div>
+            </form>
+      
+        </div>  
+        <div class="card-body">
+            <h2 class="post-title">
+                <a href="#">Noticia o evento 2</a>
+            </h2>
+            <p><span class="post-fecha"> 22 mayo 2018 </span> 
+                <span class="post-autor"><a href="#">Rainer Prueba</a></span>
+            </p>
+            <p class="post-contenido text-justify">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptas ea nisi impedit ipsa cum.
+                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
+                et odit ipsa voluptates autem ex possimus.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptas ea nisi impedit ipsa cum.
+                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
+                et odit ipsa voluptates autem ex possimus.
+                
+            </p>
+            <form action="horas.php" method="post" role="form">
+
+                <div class="contenedor-botones">
+                    <a href="#" class="btn btn-success">Leer mas</a>
+                </div>
+            </form>      
+        </div>     
+     </div>
+  </div>
+  <section class="jumbotron jumbotron2">
+      <div class="container">
+        <h1>Quienes somos</h1> 
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
+          </p>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
+          </p>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
+          </p>
+        </div>
+    </section>
 <footer>
   <div class="container-fluid">
     <div class="row">

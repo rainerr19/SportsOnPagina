@@ -1,5 +1,4 @@
 <?php
-
 include 'hora.php';
 ?>
 <!DOCTYPE html>
@@ -15,15 +14,25 @@ include 'hora.php';
   </head>
   
 <body>
-    <div class="container">
-    <h1>Horarios</h1>
-    <h3>
-        <?php
-        date_default_timezone_set("America/Mexico_City");
-        echo " La fecha y hora de hoy: " ."<strong>".date("d l H:i")."</strong>";
-        ?>
-    </h3>
-</div>
+<?php
+if(isset($_POST['btn-b'])){
+    $idCancha=$_POST['btn-b'];
+}
+$o = new canchas();//se crea el objeto
+$conteo=$o->numCanchas();//numero de canchas
+$b = $o->datoCanchas($idCancha);//funcion que obtien los datos de la cancha 1
+?>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Horario de Cancha numero <?php print $conteo;?></h1>
+            <h4>
+                <?php
+            date_default_timezone_set("America/Mexico_City");
+            echo " La fecha y hora de hoy: " ."<strong>".date("d l H:i")."</strong>";
+            ?>
+            </h4>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -31,9 +40,9 @@ include 'hora.php';
             <table id="horario" class="table table-bordered table-striped table-condensed">          
             <?php
                 actualiza();
-                $o = new canchas();
-                $b = $o->datoCanchas();
-                $ban = DBsemana($b["restric"]);
+               
+                
+                $ban = DBsemana($b["restric"]);//horrios restringidos
                 //$reservado = DBsemana("1011L07-09S07-09D");
                 $reservado = DBsemana($b["ocupacion"]);
                 $actual=[date("l",strtotime("now")),date("H",strtotime("now"))];
@@ -46,12 +55,13 @@ include 'hora.php';
         </div>
 
     </div>
-    
-<div class="container margin-b-2">
-        <a href="#" class="btn btn-success btn-lg">Reservar seleccion <span class="badge" id="c">0</span></a>
-        <button class="btn btn-warning btn-lg" onclick="clearSelec()">Borrar seleccion</button>
-</div>
-
+    <hr>
+    <div class="container margin-b-2">
+            <a href="#" class="btn btn-success btn-lg">Reservar seleccion <span class="badge" id="c">0</span></a>
+            <button class="btn btn-warning btn-lg" onclick="clearSelec()">Borrar seleccion</button>
+    </div>
+  <hr>
+  <br> 
 <script>
     //jquery--hover effect
       $(document).ready(function(){
@@ -93,8 +103,8 @@ include 'hora.php';
         }
         
 </script>
-
 <script src="js/bootstrap.min.js"></script>
+
 </body>
 
 <!-- <footer>

@@ -13,10 +13,11 @@ class canchas extends Conexion{
       return $conteo ;
       $result->closeCursor();
     }
-    function datoCanchas(){
-        $stmt = "SELECT * FROM canchas";
+    function datoCanchas($canchaID){
+        $stmt = "SELECT * FROM canchas WHERE id_canchas=:id";
+        $data=['id'=>$canchaID];
         $result = self::$conn->prepare($stmt);
-        $result->execute();//ejcutar 
+        $result->execute($data);//ejcutar 
         $datos = ($result->fetch(PDO::FETCH_ASSOC));
         return $datos ;
         $result->closeCursor();
@@ -233,7 +234,7 @@ function tablaCreator($semBAN,$semBloc,$now){
 //
 function actualiza(){
     $p = new canchas();
-    $g = $p->datoCanchas(); //dia-mes-año hora:mi:s
+    $g = $p->datoCanchas(1); //dia-mes-año hora:mi:s
     $guardado=strtotime($g["fecha_g"]);//stamp 2018-05-25 17:44:0
     $ocupa=DBsemana($g["ocupacion"]);//"1011L1819M09-12I07-09S07-09D"
     if($ocupa!=NULL){

@@ -23,7 +23,7 @@ if (isset($_SESSION['nombreUser'])) {
    <header>
       <nav class="navbar  navbar-expand-md bg-dark navbar-dark" role="navigation">
         
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
             <span class="navbar-toggler-icon"></span>
           </button>
             <!-- <a class="navbar-brand" href="#">
@@ -45,7 +45,7 @@ if (isset($_SESSION['nombreUser'])) {
                 <a class='nav-link' href='registro.php'>Registro</a>
             </li>
          </ul>
-                <ul class='nav navbar-nav navbar-right'>
+                <ul class='nav navbar-nav ml-auto'>
                   <li class='nav-item active'>
                     <a class='nav-link' href='inicioS.php'>
                       Inicia Sesion

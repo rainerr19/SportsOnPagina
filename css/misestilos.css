@@ -2,9 +2,14 @@
 nav.navbar {
     margin-bottom: 0;
 }
-section.jumbotron{
+section.jumbotron1{
+    margin-top: 1px;
     background: #586E5F;
     color: white;
+}
+section.jumbotron2{
+    margin-top: 4px;
+
 }
 /* canchass*/
 section.main{
@@ -51,6 +56,15 @@ th.cel-busy{
     margin-bottom: 20px;
 
 }
+/* caja transparente */
+div.transbox {
+    margin: 10px;
+    background-color: black;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+  }
+
+/* footer */
 footer{
     bottom: 0;
     padding-top: 30px;

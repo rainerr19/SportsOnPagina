@@ -26,7 +26,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
       <nav class="navbar  navbar-expand-md bg-dark navbar-dark" role="navigation">
         
           
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
             <span class="navbar-toggler-icon"></span>
           </button>
             <!-- <a class="navbar-brand" href="#">
@@ -50,7 +50,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               <a class='nav-link' href='registro.php'>Registro</a>
                 </li>
               </ul>
-                <ul class='navbar-nav navbar-right'>
+                <ul class='navbar-nav ml-auto'>
                   <li class='nav-item dropdown'>
                     <a class='nav-link' href='inicioS.php'>
                       Inicia Sesion
@@ -61,7 +61,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               $nom =$_SESSION['nombreUser'];
               echo "
               </ul>
-                <ul class='navbar-nav navbar-right'>
+                <ul class='navbar-nav ml-auto'>
                   <li class='dropdown'>
                     <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown'>
                        $nom 
@@ -80,7 +80,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     </header>
 
 
-<section class="jumbotron">
+<section class="jumbotron jumbotron1">
       <div class="container">
         <h1>canchas</h1> 
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
@@ -91,7 +91,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
 
 <section class="main container">
     <div class="row">
-        <section class="col-md-9">
+        <section class="col-md-10">
             <article class="post clearfix">
                 
                 <a href="#" class="thumbnail fill-img" type="button" data-toggle="modal" data-target="#myModal1">
@@ -100,9 +100,6 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                 <h2 class="post-title">
                     <a href="#">Cancha de futbol Brasileirao</a>
                 </h2>
-                <p><span class="post-fecha"> 22 mayo 2018 </span> 
-                    <span class="post-autor"><a href="#">Rainer Prueba</a></span>
-                </p>
                 <p class="post-contenido text-justify">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Voluptas ea nisi impedit ipsa cum.
@@ -117,8 +114,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                 <form action="horas.php" method="post" role="form">
 
                     <div class="contenedor-botones">
-                        <button type="submit" class="btn btn-primary" id='cancha1' name="btn-b" value="1">Apartar</button>
-                        <a href="#" class="btn btn-success">Leer mas</a>
+                        <button type="submit" class="btn btn-primary" name="btn-b" value="1">Apartar</button>
                     </div>
                 </form>
                 <!-- mortrar imagen+++++++++++++++++++++++++ -->
@@ -144,9 +140,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                 <h2 class="post-title">
                     <a href="#">Cancha de futbol colegio hebreo</a>
                 </h2>
-                <p><span class="post-fecha"> 22 mayo 2018 </span> 
-                    <span class="post-autor"><a href="#">Rainer Prueba</a></span>
-                </p>
+
                 <p class="post-contenido text-justify">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Voluptas ea nisi impedit ipsa cum.
@@ -160,7 +154,6 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                 </p>
                 <div class="contenedor-botones">
                     <a href="#" class="btn btn-primary">Apartar</a>
-                    <a href="#" class="btn btn-success">Leer mas</a>
                 </div>
                 <!-- mortrar imagen+++++++++++++++++++++++++ -->
                 <div class="modal fade" id="myModal2" role="dialog">
@@ -179,6 +172,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
         </section>
     </div>
 </section>
+
 <footer>
   <div class="container-fluid">
     <div class="row">
