@@ -10,6 +10,7 @@ if (isset($_SESSION['nombreUser'])) {
 <html lang="es">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <!-- texto español -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -23,10 +24,10 @@ if (isset($_SESSION['nombreUser'])) {
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
               <span class="navbar-toggler-icon"></span>
             </button>
-              <!-- <a class="navbar-brand" href="#">
-                <img alt="Brand" src="img/ppp.png" width="100" height="40">
-              </a> -->
-              <a href="index_main.php" class="navbar-brand">SportsOn</a>
+            <a class="navbar-brand" href="index_main.php">
+              <img alt="Brand" src="img/logo2.png" style="width: 10rem;height: 4rem;">
+            </a>
+              <!-- <a href="index_main.php" class="navbar-brand">SportsOn</a> -->
             <!-- menu -->
             <div class="collapse navbar-collapse" id="menu1">
             <ul class="navbar-nav">

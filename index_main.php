@@ -1,4 +1,5 @@
 <?php
+include 'DBnoticias.php';
 if(!isset($_SESSION)){
   session_start();}
 //enviar post con--> action="recibir.php"
@@ -12,7 +13,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UFT-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <!-- texto español -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -29,11 +30,12 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
             <span class="navbar-toggler-icon"></span>
           </button>
-            <!-- <a class="navbar-brand" href="#">
-              <img alt="Brand" src="img/ppp.png" width="100" height="40">
-            </a> -->
+
+            <a class="navbar-brand" href="#">
+              <img alt="Brand" src="img/logo2.png" style="width: 10rem;height: 4rem;">
+            </a>
           
-          <a href="index_main.php" class="navbar-brand">SportsOn</a>
+          <!-- <a href="index_main.php" class="navbar-brand">SportsOn</a> -->
           <!-- menu -->
           <div class="collapse navbar-collapse" id="menu1">
             <ul class="navbar-nav">
@@ -43,7 +45,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="canchas.php">Canchas</a>
+                <a class="nav-link disabled" href="#">Canchas</a>
               </li>
              
             <?php 
@@ -134,60 +136,46 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
           </p>
         </div>
     </section>
-
- <div class="container">
-     <div class="card text-center">
-        <div class="card-body">
-            <h2 class="post-title">
-                <a href="#">Noticia o evento1</a>
-            </h2>
-            <p><span class="post-fecha"> 22 mayo 2018 </span> 
-                <span class="post-autor"><a href="#">Rainer Prueba</a></span>
+  
+  <div class="container">
+    <?php
+        $ob = new noticias();//se crea el objeto
+        $conteo=$ob->numNoticias();//numero de noticias
+        
+        for ($i = 1; $i <= $conteo; $i++) {
+          $datos = $ob->datoNoticias($i);
+          $titulo = $datos["titulo"];
+        
+          if (is_null($titulo) == FALSE ){
+            $res = $datos["resumen"];
+            $fecha =  date("d M Y- H:i",strtotime($datos["fecha"]));
+            $autor = $datos["autor"];
+            $img1 = $datos["imagen1"];
+            $pieImg1 = $datos["pieFoto1"];
+            $src = "img\imgNews\ $i \ $img1";
+            $src =  str_replace(' ', '', $src);
+            $imgIN = "<!-- <img class='card-img-top' style='height: 16rem;' src='$src'> -->";
+            echo "<div class='card text-center'>
+            <div class='card-body'>
+            <h3 class='card-title'> $titulo </h5>
+            <p><span class='post-fecha'> $fecha </span> 
+                <span class='post-autor'><a href='#'>$autor</a></span>
             </p>
-            <p class="post-contenido text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas ea nisi impedit ipsa cum.
-                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                et odit ipsa voluptates autem ex possimus.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas ea nisi impedit ipsa cum.
-                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                et odit ipsa voluptates autem ex possimus.
-                
+            <p class='card-text text-justify'>
+                $res 
             </p>
-            <form action="horas.php" method="post" role="form">
-                <div class="contenedor-botones">
-                    <a href="#" class="btn btn-success">Leer mas</a>
+            <form action='noticia.php' method='post' role='form'>
+                <div class='contenedor-botones'>
+                    <button type='submit' name='btn-leer' value='$i'class='btn btn-success'>Leer mas</button>
                 </div>
             </form>
-      
-        </div>  
-        <div class="card-body">
-            <h2 class="post-title">
-                <a href="#">Noticia o evento 2</a>
-            </h2>
-            <p><span class="post-fecha"> 22 mayo 2018 </span> 
-                <span class="post-autor"><a href="#">Rainer Prueba</a></span>
-            </p>
-            <p class="post-contenido text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas ea nisi impedit ipsa cum.
-                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                et odit ipsa voluptates autem ex possimus.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas ea nisi impedit ipsa cum.
-                Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                et odit ipsa voluptates autem ex possimus.
-                
-            </p>
-            <form action="horas.php" method="post" role="form">
 
-                <div class="contenedor-botones">
-                    <a href="#" class="btn btn-success">Leer mas</a>
-                </div>
-            </form>      
-        </div>     
-     </div>
+              </div> 
+            </div>";
+          }
+        }
+    ?>
+        
   </div>
   <section class="jumbotron jumbotron2">
       <div class="container">
@@ -239,10 +227,11 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     </div>
   </div>
 </footer>
+<script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
     
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    
     
 </html> 

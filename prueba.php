@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UFT-8">
+    <meta charset="UFT-8">    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <!-- texto español -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -102,61 +103,52 @@
     </div>
 <!-- scrollspy  -->
 <section class="main container">
-  <section class="col-md-10">
-  <?php
-    include 'hora.php';
-    $o = new canchas();//se crea el objeto
-    $conteo=$o->numCanchas();//numero de canchas
-    
-    
-    for ($i = 1; $i <= $conteo; $i++) {
-      $g = $o->datoCanchas($i); 
-      $Cnombre = $g["nombre"];
-      $detalles=$g["detalles"];
-      $tipo = $g["tipo"];
-      $caracteristicas = $g["caracteristicas"];
-      print " <article class='post clearfix'>
-      <a href='#' class='thumbnail fill-img' type='button' data-toggle='modal' data-target='#myModal$i'>
-              <img src='img/img_hebreo.jpg' alt=''>
-      </a>
-      <h2 class='post-title'>
-          <a href='#'>Cancha $Cnombre</a> 
-      </h2>
-      <h5> Tipo: $tipo</h5>
-      <h5> Caracteristicas: $caracteristicas</h5>
-  
-      <p class='post-contenido text-justify'>
-          $detalles  
-      </p>
-      <form action='horas.php' method='post' role='form'>
-
-      <div class='contenedor-botones'>
-          <button type='submit' class='btn btn-primary' name='btn-b' value='$i'>Apartar</button>
-      </div>
-     </form>
-      <!-- mortrar imagen+++++++++++++++++++++++++ -->
-      <div class='modal fade' id='myModal$i' role='dialog'>
-          <div class='modal-dialog' role='document'>                                    
-              <div class='modal-header'>
-                  <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-              </div>
-                  <div class='modal-body'>
-                      <a href='' class='thumbnail'>
-                          <img src='img/img_hebreo.jpg' alt='img'>
-                      </a>
-                  </div>
-              </div>
-          </div>
-  </article>";
-    } 
-   ?>
-      
-
-     
-  </section>
+<div class="embed-responsive embed-responsive-21by9">
+<iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/AFXe9XuUT4o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
 
 </section> 
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+      <ul class="social">
+        <span>Red Social</span>    
+          <li>
+              <a href="#"><i class="fa fa-facebook fa-4x"></i></a>
+          </li>
         
+          <li>
+              <a href="#"><i class="fa fa-twitter fa-4x"></i></a>
+          </li>
+          
+          <li>
+              <a href="#"><i class="fa fa-instagram fa-4x"></i></a>
+          </li>
+        
+    </ul>
+      </div>
+      <div class="col-md-6">
+      <ul class="adress">
+          <span>Contacto</span>    
+          <li>
+            <p>Lorem ipsum dolor sit amet, vero omnis vocibus</p>
+          </li>
+                
+          <li>
+            <p>+57 1234 56789</p>
+          </li>
+                
+          <li>
+            <p>info@gmail.com</p>
+          </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
           <script src="js/jquery.js"></script>
           <script src="js/bootstrap.min.js"></script>
   

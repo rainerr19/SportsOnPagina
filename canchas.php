@@ -13,6 +13,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
 <html lang="es">
   <head>
     <meta charset="UFT-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <!-- texto español -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -29,10 +30,10 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
             <span class="navbar-toggler-icon"></span>
           </button>
-            <!-- <a class="navbar-brand" href="#">
-              <img alt="Brand" src="img/ppp.png" width="100" height="40">
-            </a> -->
-            <a href="index_main.php" class="navbar-brand">SportsOn</a>
+          <a class="navbar-brand" href="index_main.php">
+              <img alt="Brand" src="img/logo2.png" style="width: 10rem;height: 4rem;">
+            </a>
+            <!-- <a href="index_main.php" class="navbar-brand">SportsOn</a> -->
           <!-- menu -->
           <div class="collapse navbar-collapse" id="menu1">
             <ul class="navbar-nav">
@@ -82,7 +83,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
 
 <section class="jumbotron jumbotron1">
       <div class="container">
-        <h1>canchas</h1> 
+        <h1>Canchas</h1> 
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
           </p>
         </div>
@@ -91,86 +92,61 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
 
 <section class="main container">
     <div class="row">
-        <section class="col-md-10">
-            <article class="post clearfix">
-                
-                <a href="#" class="thumbnail fill-img" type="button" data-toggle="modal" data-target="#myModal1">
-                    <img src="img/img_brasil.png" alt="">
-                </a>
-                <h2 class="post-title">
-                    <a href="#">Cancha de futbol Brasileirao</a>
-                </h2>
-                <p class="post-contenido text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptas ea nisi impedit ipsa cum.
-                    Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                    et odit ipsa voluptates autem ex possimus.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptas ea nisi impedit ipsa cum.
-                    Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                    et odit ipsa voluptates autem ex possimus.
-                    
-                </p>
-                <form action="horas.php" method="post" role="form">
+    <section class="col-md-10">
+    <?php
+      include 'hora.php';
+      $o = new canchas();//se crea el objeto
+      $conteo=$o->numCanchas();//numero de canchas
+      
+      
+      for ($i = 1; $i <= $conteo; $i++) {
+        $g = $o->datoCanchas($i); 
+        $Cnombre = $g["nombre"];
+        $detalles=$g["detalles"];
+        $tipo = $g["tipo"];
+        $dir = $g["direccion"];
+        $img = $g["imgen"];//img_brasil.png
+        $caracteristicas = $g["caracteristicas"];
+        print " <article class='post clearfix'>
+        <a href='#' class='thumbnail fill-img' type='button' data-toggle='modal' data-target='#myModal$i'>
+                <img src='img/canchas/$img' alt=''>
+        </a>
+        <h2 class='post-title'>
+            <a href='#'>Cancha $Cnombre</a> 
+        </h2>
+        <h5> Tipo: $tipo</h5>
+        <h5> Caracteristicas: $caracteristicas</h5>
+        <h5> Dirección: $dir</h5>
+        <p class='post-contenido text-justify'>
+            $detalles  
+        </p>
+        <form action='horas.php' method='post' role='form'>
 
-                    <div class="contenedor-botones">
-                        <button type="submit" class="btn btn-primary" name="btn-b" value="1">Apartar</button>
+        <div class='contenedor-botones'>
+            <button type='submit' class='btn btn-primary' name='btn-b' value='$i'>Apartar</button>
+        </div>
+      </form>
+        <!-- mortrar imagen+++++++++++++++++++++++++ -->
+        <div class='modal fade' id='myModal$i' role='dialog'>
+            <div class='modal-dialog modal-dialog-centered' role='document'> 
+            <div class='modal-content'>                              
+                <div class='modal-header'>
+                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                </div>
+                    <div class='modal-body'>
+                        <a href='' class='thumbnail'>
+                            <img src='img/canchas/$img' alt='img'>
+                        </a>
                     </div>
-                </form>
-                <!-- mortrar imagen+++++++++++++++++++++++++ -->
-                <div class="modal fade" id="myModal1" role="dialog">
-                    <div class="modal-dialog" role="document">                                    
-                        <div class="modal-header">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                        <div class="modal-body">
-                            <a href="" class="thumbnail">
-                                <img src="img/img_brasil.png" alt="img">
-                            </a>
-                        </div>
-                    
                     </div>
                 </div>
-            </article>
-
-            <article class="post clearfix">
-                <a href="#" class="thumbnail fill-img" type="button" data-toggle="modal" data-target="#myModal2">
-                        <img src="img/img_hebreo.jpg" alt="">
-                </a>
-                <h2 class="post-title">
-                    <a href="#">Cancha de futbol colegio hebreo</a>
-                </h2>
-
-                <p class="post-contenido text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptas ea nisi impedit ipsa cum.
-                    Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                    et odit ipsa voluptates autem ex possimus.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptas ea nisi impedit ipsa cum.
-                    Blanditiis iusto sint id tenetur in doloremque repellat laudantium, 
-                    et odit ipsa voluptates autem ex possimus.
-                    
-                </p>
-                <div class="contenedor-botones">
-                    <a href="#" class="btn btn-primary">Apartar</a>
-                </div>
-                <!-- mortrar imagen+++++++++++++++++++++++++ -->
-                <div class="modal fade" id="myModal2" role="dialog">
-                    <div class="modal-dialog" role="document">                                    
-                        <div class="modal-header">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                            <div class="modal-body">
-                                <a href="" class="thumbnail">
-                                    <img src="img/img_hebreo.jpg" alt="img">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-            </article>
-        </section>
-    </div>
+            </div>
+    </article>";
+      } 
+    ?>
+          
+  </section>
+</div>
 </section>
 
 <footer>
