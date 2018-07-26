@@ -1,5 +1,5 @@
 <?php
-include 'DBnoticias.php';
+include 'DBnoticiasYeventos.php';
 if(!isset($_SESSION)){
   session_start();}
 //enviar post con--> action="recibir.php"
@@ -31,7 +31,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
             <span class="navbar-toggler-icon"></span>
           </button>
 
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.php">
               <img alt="Brand" src="img/logo2.png" style="width: 10rem;height: 4rem;">
             </a>
           
@@ -41,7 +41,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
             <ul class="navbar-nav">
 
               <li class="nav-item active">
-                <a class="nav-link" href="#">Inicio</a>
+                <a class="nav-link" href="index.php">Inicio</a>
               </li>
               
               <li class="nav-item">
@@ -136,47 +136,86 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
           </p>
         </div>
     </section>
-  
+    
   <div class="container">
+      <h5 class="card-header text-center"> NEWS </h5>
     <?php
-        $ob = new noticias();//se crea el objeto
-        $conteo=$ob->numNoticias();//numero de noticias
+        $ob = new noticiasYeventos();//se crea el objeto
+        //$conteo=$ob->numNoticias();//numero de noticias
+        $noticiasRecientes=$ob->NoticiasRecientes(3);// numero de noticias a mostrar
+            // var_dump($noticiasRecientes[1]["id_noticia"]);
+        foreach($noticiasRecientes as $noticia){
+            $i=$noticia["id_noticia"];
+            $datos = $ob->datoNoticias($i);
+            $titulo = $datos["titulo"];
+          
+            if (is_null($titulo) == FALSE ){
+              $res = $datos["resumen"];
+              $fecha =  date("d M Y- H:i",strtotime($datos["fecha"]));
+              $autor = $datos["autor"];
+              $img1 = $datos["imagen1"];
+              $pieImg1 = $datos["pieFoto1"];
+              $src = "img\imgNews\ $i \ $img1";
+              $src =  str_replace(' ', '', $src);
+              $imgIN = "<!-- <img class='card-img-top' style='height: 16rem;' src='$src'> -->";
+              echo "<div class='card text-center'>
+              <div class='card-body'>
+              <h3 class='card-title'> $titulo </h5>
+              <p><span class='post-fecha'> $fecha </span> 
+                  <span class='post-autor'><a href='#'>$autor</a></span>
+              </p>
+              <p class='card-text text-justify'>
+                  $res 
+              </p>
+              <form action='noticia.php' method='get' role='form'>
+                  <div class='contenedor-botones'>
+                      <button type='submit' name='btn-leer' value='$i'class='btn btn-success'>Leer mas</button>
+                  </div>
+              </form>
+  
+                </div> 
+              </div>";
+            }
         
-        for ($i = 1; $i <= $conteo; $i++) {
-          $datos = $ob->datoNoticias($i);
-          $titulo = $datos["titulo"];
-        
-          if (is_null($titulo) == FALSE ){
-            $res = $datos["resumen"];
-            $fecha =  date("d M Y- H:i",strtotime($datos["fecha"]));
-            $autor = $datos["autor"];
-            $img1 = $datos["imagen1"];
-            $pieImg1 = $datos["pieFoto1"];
-            $src = "img\imgNews\ $i \ $img1";
-            $src =  str_replace(' ', '', $src);
-            $imgIN = "<!-- <img class='card-img-top' style='height: 16rem;' src='$src'> -->";
-            echo "<div class='card text-center'>
-            <div class='card-body'>
-            <h3 class='card-title'> $titulo </h5>
-            <p><span class='post-fecha'> $fecha </span> 
-                <span class='post-autor'><a href='#'>$autor</a></span>
-            </p>
-            <p class='card-text text-justify'>
-                $res 
-            </p>
-            <form action='noticia.php' method='post' role='form'>
-                <div class='contenedor-botones'>
-                    <button type='submit' name='btn-leer' value='$i'class='btn btn-success'>Leer mas</button>
-                </div>
-            </form>
-
-              </div> 
-            </div>";
-          }
         }
-    ?>
-        
+    ?>      
   </div>
+  <br>
+  <!-- <hr> -->
+  <div class="container">
+    <div class="card text-center">
+      <h5 class="card-header">
+        Eventos
+      </h5>
+      <div class="card-body">
+        <?php 
+        //$conteo=$ob->numNoticias();//numero de noticias
+        $eventosRecientes=$ob->eventosRecientes(3);// numero de eventos a mostrar
+            // var_dump($noticiasRecientes[1]["id_noticia"]);
+        foreach($eventosRecientes as $evento){
+            $i=$evento["id_evento"];
+            $datos1 = $ob->datoEventos($i);
+            $titulo = $datos1["titulo"];
+            $res = $datos1["resumen"];
+            //$img1 = $datos["imagen1"];
+            //$src = "img\imgNews\ $i \ $img1";
+            //$src =  str_replace(' ', '', $src);
+            //$imgIN = "<!-- <img class='card-img-top' style='height: 16rem;' src='$src'> -->";
+
+            echo "<h5 class='card-title'>$titulo</h5>
+                  <p class='card-text text-justify'>$res</p>
+                  <form action='eventos.php' method='get' role='form'>
+                    <div class='contenedor-botones'>
+                        <button type='submit' name='btn-participar' value='$i'class='btn btn-primary'>participar</button>
+                    </div>
+                  </form>";
+          }
+        ?>
+        
+      </div>
+    </div>
+  </div>
+
   <section class="jumbotron jumbotron2">
       <div class="container">
         <h1>Quienes somos</h1> 

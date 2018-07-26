@@ -24,7 +24,7 @@ if (isset($_SESSION['nombreUser'])) {
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="index_main.php">
+            <a class="navbar-brand" href="index.php">
               <img alt="Brand" src="img/logo2.png" style="width: 10rem;height: 4rem;">
             </a>
               <!-- <a href="index_main.php" class="navbar-brand">SportsOn</a> -->
@@ -33,11 +33,11 @@ if (isset($_SESSION['nombreUser'])) {
             <ul class="navbar-nav">
   
               <li class="nav-item">
-              <a class="nav-link" href="index_main.php">Inicio</a>
+              <a class="nav-link" href="index.php">Inicio</a>
               </li>
   
               <li class="nav-item">
-              <a class="nav-link" href="canchas.php">Canchas</a>
+              <a class="nav-link disabled" href="#">Canchas</a>
               </li>
               <li class='nav-item'>
                   <a class='nav-link active' href='registro.php'>Registro</a>

@@ -13,7 +13,7 @@ if(!isset($_SESSION)){
     setcookie("cookieUserEmail","",time()*30*24*60*60,"/");
     setcookie("cookieUserNombre","",time()*30*24*60*60,"/");
     session_destroy();
-    header("location:index_main.php");
+    header("location:index.php");
     exit;
 }
 ?>

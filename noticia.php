@@ -1,5 +1,5 @@
 <?php
-include 'DBnoticias.php';
+include 'DBnoticiasYeventos.php';
 if(!isset($_SESSION)){
     session_start();
 }
@@ -29,7 +29,7 @@ if(!isset($_SESSION)){
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu1">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="index_main.php">
+            <a class="navbar-brand" href="index.php">
               <img alt="Brand" src="img/logo2.png" style="width: 10rem;height: 4rem;">
             </a>
               <!-- <a href="index_main.php" class="navbar-brand">SportsOn</a> -->
@@ -38,23 +38,44 @@ if(!isset($_SESSION)){
             <ul class="navbar-nav">
   
               <li class="nav-item">
-              <a class="nav-link" href="index_main.php">Inicio</a>
+              <a class="nav-link" href="index.php">Inicio</a>
               </li>
   
               <li class="nav-item">
-              <a class="nav-link" href="canchas.php">Canchas</a>
+              <a class="nav-link disabled" href="#">Canchas</a>
               </li>
-              <li class='nav-item'>
-                  <a class='nav-link' href='registro.php'>Registro</a>
-              </li>
-           </ul>
-                  <ul class='nav navbar-nav ml-auto'>
+              <?php 
+                if (!isset($_SESSION['nombreUser'])) {
+                echo "
+                <li class='nav-item'>
+                    <a class='nav-link' href='registro.php'>Registro</a>
+                </li>
+                </ul>
+                
+                    <ul class='navbar-nav ml-auto'>
                     <li class='nav-item'>
-                      <a class='nav-link' href='inicioS.php'>
+                        <a class='nav-link' href='inicioS.php'>
                         Inicia Sesion
-                      </a>
+                        </a>
                     </li>
-                  </ul>
+                    </ul> ";
+                }else{
+                $nom =$_SESSION['nombreUser'];
+                echo "
+                </ul>
+                    <ul class='navbar-nav ml-auto'>
+                    <li class='dropdown'>
+                        <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown'>
+                        $nom 
+                        </a>
+                        <div class='dropdown-menu'>
+                        <a class='dropdown-item' href='#'>Perfil</a>
+                        <a class='dropdown-item' href='close.php'>Cerrar Sesion</a>
+                        </div>
+                    </li>
+                    </ul> ";
+                }
+                ?>
             </div>
   
         </nav>
@@ -63,13 +84,13 @@ if(!isset($_SESSION)){
 
 <div class="container">
 <?php
-    if(isset($_POST['btn-leer'])){
-        $noticiaID = $_POST['btn-leer'];
+    if(isset($_GET['btn-leer'])){
+        $noticiaID = $_GET['btn-leer'];
     }else{
     
-        header("location:index_main.php");
+        header("location:index.php");
     }
-      $ob = new noticias();//se crea el objeto
+      $ob = new noticiasYeventos();//se crea el objeto
       //$conteo=$ob->numNoticias();//numero de noticias
       $datos = $ob->datoNoticias($noticiaID);
 
@@ -207,36 +228,42 @@ if(!isset($_SESSION)){
             <h3>Otras noticias</h3>
             <div class="list-group">
             <?php
-            $conteo=$ob->numNoticias();//numero de noticias
-            
-            for ($i = 1; $i <= $conteo; $i++) {
-              $datos1 = $ob->datoNoticias($i);
-              $titulo1 = $datos1["titulo"];
-              if ((is_null($titulo1) == FALSE) and ($i != $noticiaID) ){
-                $res1 = $datos1["resumen"];
-                $fechas1 = fechas($fecha);
-                  echo "    
-                  <form action='noticia.php' method='post'>     
-                      <a href='#' onclick='parentNode.submit()' class='list-group-item list-group-item-action list-group-item-dark flex-column align-items-start'>
-                          <input type='hidden' name='btn-leer' value='$i'/>
-                          <div class='justify-content-between'>
-                              <h5 class='mb-1'>$titulo1 </h5>
-                              <small class='text-muted'> $fechas1</small>
-                          </div>
-                          <p class='mb-1'> $res1</p>
-                      </a>
-                  </from>
-                  ";
-              }
-            
-            }
+            //$conteo=$ob->numNoticias();//numero de noticias
+            $noticiasRecientes=$ob->NoticiasRecientes(3);// numero de noticias a mostrar
 
+            // var_dump($noticiasRecientes[1]["id_noticia"]);
+            foreach($noticiasRecientes as $noticia){
+                $i=$noticia["id_noticia"];
+                $datos1 = $ob->datoNoticias($i);
+                $titulo1 = $datos1["titulo"];
+                if ((is_null($titulo1) == FALSE) and ($i != $noticiaID) ){
+                  $res1 = $datos1["resumen"];
+                  $fechas1 = fechas($fecha);
+                    echo "    
+                    <form action='noticia.php' method='get'>     
+                        <a href='#' onclick='parentNode.submit()' class='list-group-item list-group-item-action list-group-item-dark flex-column align-items-start'>
+                            <input type='hidden' name='btn-leer' value='$i'/>
+                            <div class='justify-content-between'>
+                                <h5 class='mb-1'>$titulo1 </h5>
+                                <small class='text-muted'> $fechas1</small>
+                            </div>
+                            <p class='mb-1'> $res1</p>
+                        </a>
+                    </from>
+                    ";
+                }
+            }
             ?>
             </div>
 
         </div>
     </div>
 </div>
+                
+                
+            
+            
+
 
 
 

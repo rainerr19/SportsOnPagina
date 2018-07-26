@@ -74,7 +74,7 @@
             $_SESSION["nombreUser"]=$valor["nombre"];
             //$_SESSION["cel"]=$celular;
             $_SESSION["email"]=$correo;
-            header("location:index_main.php");
+            header("location:index.php");
           //echo "esta ingresando :)";
         }else {
           echo "<div class='alert alert-danger alert-dismissible'>

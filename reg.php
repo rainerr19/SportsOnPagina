@@ -8,9 +8,9 @@
     function existsEmail($email){
       $stmt = "SELECT COUNT(id_usuario) FROM usuarios WHERE email = :email"; //statement
       $result = self::$conn->prepare($stmt);
-	  $result->execute(array(":email"=>$email));
-	  $c = ($result->fetch(PDO::FETCH_ASSOC));// te genera un arreglo en forma de json
-	  $conteo = $c["COUNT(id_usuario)"];// se toma el dato del arreglo
+      $result->execute(array(":email"=>$email));
+      $c = ($result->fetch(PDO::FETCH_ASSOC));// te genera un arreglo en forma de json
+      $conteo = $c["COUNT(id_usuario)"];// se toma el dato del arreglo
       return $conteo > 0 ? true : false;
       $result->closeCursor();
     }
