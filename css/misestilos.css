@@ -111,8 +111,7 @@ footer{
         margin-right: 30px;
         font-size:29px;
     }
-
-
+/* img[alt="www.000webhost.com"] {display: none;} */
 /* Slider estilos*/
 div.mySlides {display: none;}
 img {vertical-align: middle;

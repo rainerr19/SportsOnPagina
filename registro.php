@@ -68,67 +68,67 @@ if (isset($_SESSION['nombreUser'])) {
   <div class="row justify-content-center">
     <div class="col-md-7">
       <div class="card">
-      <header class="card-header">
-        <h4 class="card-title mt-2">Crear Cuenta</h4>
-      </header>
-      <article class="card-body">
-      <form method="post">
-        
-        <div class="form-row">
-          <div class="col form-group">
-            <label>Nombres </label>   
-              <input type="text" class="form-control" name="name" placeholder="Nombres">
-          </div> <!-- form-group end.// -->
-          <div class="col form-group">
-            <label>Apellidos</label>
-              <input type="text" class="form-control" name="lastname" placeholder="Apellidos">
-          </div> <!-- form-group end.// -->
-        </div> <!-- Nombres -->
+        <header class="card-header">
+          <h4 class="card-title mt-2">Crear Cuenta</h4>
+        </header>
+        <article class="card-body">
+        <form method="post">
+          
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Nombres </label>   
+                <input type="text" class="form-control" name="name" placeholder="Nombres">
+            </div> <!-- form-group end.// -->
+            <div class="col form-group">
+              <label>Apellidos</label>
+                <input type="text" class="form-control" name="lastname" placeholder="Apellidos">
+            </div> <!-- form-group end.// -->
+          </div> <!-- Nombres -->
 
-        <div class="form-group">
-          <label>Email </label>
-          <input type="email" name="email" class="form-control" placeholder="Email">
-        </div> <!-- email -->
+          <div class="form-group">
+            <label>Email </label>
+            <input type="email" name="email" class="form-control" placeholder="Email">
+          </div> <!-- email -->
 
-        <div class="form-group">
+          <div class="form-group">
+              <label class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="opcion" value="1">
+              <span class="form-check-label"> Hombre </span>
+            </label>
             <label class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="opcion" value="1">
-            <span class="form-check-label"> Hombre </span>
-          </label>
-          <label class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="opcion" value="0">
-            <span class="form-check-label"> Mujer</span>
-          </label>
-        </div> <!-- genero.// -->
+              <input class="form-check-input" type="radio" name="opcion" value="0">
+              <span class="form-check-label"> Mujer</span>
+            </label>
+          </div> <!-- genero.// -->
 
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Celular</label>
-            <input type="number" class="form-control" name="cel" placeholder="Celular">
-          </div> <!-- celular.// -->
-          <div class="form-group col-md-6">
-            <label>Edad</label>
-            <input type="number" class="form-control" name="edad" min="5" max="99"/>
-          </div> <!-- Edad.// -->
-        </div> <!-- Edad y cel.// -->
-        
-        <div class="form-group">
-          <label>Crea tu password</label>
-          <input type="password" class="form-control" name="password" placeholder="Nueva contraseña">
-        </div> <!-- contraseña.// -->  
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Celular</label>
+              <input type="number" class="form-control" name="cel" placeholder="Celular">
+            </div> <!-- celular.// -->
+            <div class="form-group col-md-6">
+              <label>Edad</label>
+              <input type="number" class="form-control" name="edad" min="5" max="99"/>
+            </div> <!-- Edad.// -->
+          </div> <!-- Edad y cel.// -->
+          
+          <div class="form-group">
+            <label>Crea tu password</label>
+            <input type="password" class="form-control" name="password" placeholder="Nueva contraseña">
+          </div> <!-- contraseña.// -->  
 
-        <div class="form-group">
-            <label>Confirmacion de password</label>
-              <input class="form-control" type="password" name="confirm" placeholder="Confirme contraseña">
-         </div> <!-- confirmacion.// -->
+          <div class="form-group">
+              <label>Confirmacion de password</label>
+                <input class="form-control" type="password" name="confirm" placeholder="Confirme contraseña">
+          </div> <!-- confirmacion.// -->
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block" name="bt_reg"> Registrar  </button>
-        </div> <!-- form-group// -->      
-        <small class="text-muted">Al darle click en el Botton 'Registrar', Estarias confirmando los
-            <br> Terminos y condiciones.</small>                                          
-      </form>
-      </article> <!-- card-body end .// -->
+          <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block" name="bt_reg"> Registrar  </button>
+          </div> <!-- form-group// -->      
+          <small class="text-muted">Al darle click en el Botton 'Registrar', Estarias confirmando los
+              <br> Terminos y condiciones.</small>                                          
+        </form>
+        </article> <!-- card-body end .// -->
       </div> <!-- card -->
     </div> <!-- col-->
   </div> <!-- row-->

@@ -57,33 +57,39 @@ if (isset($_SESSION['nombreUser'])) {
 
       </nav>
     </header>
-   <div class="container">    
-        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-default" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Inicio sesion</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                            
-                        <form id="loginform" class="form-horizontal" role="form" method="post" action="">
-                            <?php
+   <div class="container">   
+    <br>  
+    <hr> 
+        <div class="row justify-content-center">                    
+            <div class="col-md-7" >
+                <div class="card">
+                    <?php
                                 include "validLogin.php";
-                            ?>
-                            <label>Usuario:</label> 
-                            <div style="margin-bottom: 20px" class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login-username" type="email" class="form-control" name="email" value="" placeholder="email">                                        
-                            </div>
-                            <label>Contraseña:</label>  
-                            <div style="margin-bottom: 20px" class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    ?>
+                    <header class="card-header">
+                        <h4 class="card-title mt-2">Inicio sesion</h4>
+                        <div style="float:right; font-size: 80%; position: relative; top:-20px">
+                        <form action='' method='post'>
+                            <a id="forgot" href='#'>Forgot password?</a>
+                            <input type='hidden' name='btn-forgot' value=''/>
+                        </form>
+                        
+                        </div>
+                    </header>     
+
+                    <article class="card-body">
+                        <form role="form" method="post" action="">
+                            <div class="form-group">
+                                <label>Usuario:</label> 
+                                <input id="mail" type="email" class="form-control" name="email" value="" placeholder="email">
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Contraseña:</label>  
                                 <input id="login-password" type="password" class="form-control" name="pass" placeholder="password">
                             </div> 
-                            <div class="input-group">
+
+                            <div class="form-group">
                                 <div class="checkbox">
                                     <label>
                                         <input id="login-remember" type="checkbox" name="remember" value="1" checked> Remember me
@@ -91,19 +97,24 @@ if (isset($_SESSION['nombreUser'])) {
                                 </div>
                             </div>
                             
-                            <div style="margin-top:10px" class="form-group">
+                            <div class="form-group">
                                 <!-- Button -->
-                                <div class="col-sm-12 controls">
-                                    <button type="submit" name="btn-login" class="btn btn-primary btn-lg">
+                                    <button type="submit" name="btn-login" class="btn btn-primary btn-block">
                                         Login 
                                     </button>
-                                </div>
                             </div>
+
                         </form>
-                 </div>                     
+                    </article> 
+                </div>
             </div>  
-        </div>
+        </div><!-- row -->
+        
+        <hr>
+        <br>
     </div>
+
+                
 <footer>
   <div class="container-fluid">
     <div class="row">
@@ -143,7 +154,49 @@ if (isset($_SESSION['nombreUser'])) {
     </div>
   </div>
 </footer>
-</body>
+
+<!-- MODAL -->
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Recordar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" method="post" action="">
+        <div class="modal-body">
+            <div class="container" id="mensaje">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#forgot").click(function(){
+        $.post("validLogin.php",
+        {   btn_forgot: "1",
+            mail: $("#mail").val()
+        },
+    function(data, status){
+        if(status=="success"){
+            console.log(data);
+            $("#mensaje").html(data);
+            $('#myModal').modal('show');
+        }else{alert("ERROR: response");};
+
+    });
+    });
+});
+
+</script>
+</body>
 </html>
