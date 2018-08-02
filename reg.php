@@ -14,10 +14,10 @@
       return $conteo > 0 ? true : false;
       $result->closeCursor();
     }
-    function insertRecord($mane, $edad, $sex, $contr, $cel, $mail){
-      $stmt = "INSERT INTO usuarios (nombre, edad, sexo, contra, celular, email) VALUES (:nom, :ed, :se, :con, :cel, :mai)";
+    function insertRecord($mane,$ape, $edad, $sex, $contr, $cel, $mail){
+      $stmt = "INSERT INTO usuarios (nombre, apellido, edad, sexo, contra, celular, email) VALUES (:nom, :ape, :ed, :se, :con, :cel, :mai)";
       $result = self::$conn->prepare($stmt);
-      $result->execute(array(":nom"=>$mane,":ed"=>$edad, ":se"=>$sex,":con"=>$contr, ":cel"=>$cel, ":mai"=>$mail));//se verifica lo que se inserto
+      $result->execute(array(":nom"=>$mane, ":ape"=>$ape,":ed"=>$edad, ":se"=>$sex,":con"=>$contr, ":cel"=>$cel, ":mai"=>$mail));//se verifica lo que se inserto
       $conteo = $result->rowCount();//contar las filas que se seleccionan
       return $conteo > 0 ? true : false;
       $result->closeCursor();
@@ -179,12 +179,12 @@ if(empty($correo)){
 		$registro = new Registrarse();//se crea el objeto para usar las funciones
 		if(!$registro->existsEmail($correo)){
 			$contraHash = password_hash($contra1, PASSWORD_DEFAULT);//encriptar contraseña 
-			$nombre1 = $nombre.$apellido;
-			if($registro->insertRecord($nombre1, $age, $sexo, $contraHash, $celular, $correo)){
+			//$nombre1 = $nombre.$apellido;
+			if($registro->insertRecord($nombre, $apellido, $age, $sexo, $contraHash, $celular, $correo)){
          $_SESSION["nombreUser"]=$nombre;
          //$_SESSION["cel"]=$celular;
          $_SESSION["email"]=$correo;
-          header("location:index_main.php");
+          header("location:index.php");
 				//echo "<h2>Registrado</h2>";
 				}else{
 				echo "<div class='alert alert-danger alert-dismissible'>

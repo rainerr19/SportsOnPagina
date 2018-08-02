@@ -18,10 +18,10 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <title>SportsOn alfa</title>
+    <link rel="icon" href="img/sprtON_icon.ico">
+    <title>SportsOnCol</title>
   </head>
-  <body>
+  <body style='background-color: whitesmoke;'>
 
     <header>
       <nav class="navbar navbar-expand-md bg-dark navbar-dark" role="navigation">
@@ -48,6 +48,9 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                 <a class="nav-link disabled" href="#">Canchas</a>
               </li>
              
+              <li class="nav-item">
+                <a class="nav-link" href="eventos.php">Eventos</a>
+              </li>
             <?php 
             if (!isset($_SESSION['nombreUser'])) {
               echo "
@@ -72,7 +75,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                     <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown'>
                        $nom 
                     </a>
-                    <div class='dropdown-menu'>
+                    <div class='dropdown-menu dropdown-menu-right'>
                       <a class='dropdown-item' href='#'>Perfil</a>
                       <a class='dropdown-item' href='close.php'>Cerrar Sesion</a>
                     </div>
@@ -85,15 +88,58 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     </header>
     <!-- inicio de slider -->
     <div id="slider1" class="carousel slide" data-ride="carousel">
- <!-- ol es un numerador -->
-    <ol class="carousel-indicators">
+     <!-- ol es un numerador -->
+      <ol class="carousel-indicators">
         <li data-target="#slider1" data-slide-to="0" class="active"></li>
         <li data-target="#slider1" data-slide-to="1"></li>
         <li data-target="#slider1" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner">
-
-        <div class="carousel-item active">
+        <?php 
+          $ob = new noticiasYeventos();//se crea el objeto
+          //$conteo=$ob->numNoticias();//numero de noticias
+          $noticiasRecientes=$ob->NoticiasRecientes(3);// numero de noticias a mostrar
+              // var_dump($noticiasRecientes[1]["id_noticia"]);
+              $primero=TRUE;
+          foreach($noticiasRecientes as $noticia){
+              $i=$noticia["id_noticia"];
+              $datos = $ob->datoNoticias($i);
+              $titulo = $datos["titulo"];
+              $img1 = $datos["imagen1"];
+              $src = "img\imgNews\ $i \ $img1";
+              $src =  str_replace(' ', '', $src);
+           
+              if($primero){
+                echo "
+                <div class='carousel-item active' style='background:#1d1d1b;'>
+                  <div class='text-center'>
+                    <a href='noticia.php?btn-leer=$i'>
+                      <img class='img-fluid' style = 'max-height: 400px;' src='$src' alt='First slide'>
+                    </a>
+                  </div>
+                  <div class='carousel-caption d-none d-md-block transbox'>
+                    <h5 class='mb-1'>$titulo</h5>
+                    </div>
+                </div>
+                ";
+                $primero=FALSE;
+              }else{
+                echo "
+                <div class='carousel-item'>
+                <div class='text-center'>
+                  <a href='noticia.php?btn-leer=$i'>
+                    <img class='img-fluid' style = 'max-height: 400px;' src='$src' alt='slide'>
+                  </a>
+                </div>
+                  <div class='carousel-caption d-none d-md-block transbox'>
+                      <h5>$titulo</h5>
+                    </div>
+                </div>
+                ";
+              }
+            }
+        ?>
+        <!-- <div class="carousel-item active">
           <img class="d-block w-100" src="img/ppp.png" alt="First slide">
           <div class="carousel-caption d-none d-md-block transbox">
               <h5>Primer slide</h5>
@@ -114,7 +160,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
             <h5>tercer slide</h5>
             
           </div>
-        </div>
+        </div> -->
 
       </div>
       <!-- flecha indicadora de retroceso -->
@@ -131,9 +177,12 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
 
     <section class="jumbotron jumbotron1">
       <div class="container">
-        <h1>bienvenido</h1> 
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
-          </p>
+        <h1>¿Quienes somos?</h1> 
+        <p>
+        Somos una empresa que proporciona información acerca de escenarios deportivos,
+        a través de una aplicación web, conectamos deportistas, practicantes
+        y aficionados al deporte con dueños de canchas deportivas.
+        </p>
         </div>
     </section>
     
@@ -181,7 +230,10 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     ?>      
   </div>
   <br>
-  <!-- <hr> -->
+  <!-- <div class="container">
+    <hr style="background: red; height: 5px;"> 
+  </div>
+  <br> -->
   <div class="container">
     <div class="card text-center">
       <h5 class="card-header">
@@ -204,7 +256,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
 
             echo "<h5 class='card-title'>$titulo</h5>
                   <p class='card-text text-justify'>$res</p>
-                  <form action='eventos.php' method='get' role='form'>
+                  <form action='evento.php' method='get' role='form'>
                     <div class='contenedor-botones'>
                         <button type='submit' name='btn-participar' value='$i'class='btn btn-primary'>participar</button>
                     </div>
@@ -215,19 +267,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
       </div>
     </div>
   </div>
-
-  <section class="jumbotron jumbotron2">
-      <div class="container">
-        <h1>Quienes somos</h1> 
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
-          </p>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
-          </p>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident quidem rerum voluptatum! Ea consequatur, a assumenda quibusdam laborum libero, tenetur, aspernatur mollitia in nulla magnam dolor ipsum vel ullam eligendi?
-          </p>
-        </div>
-    </section>
-
+  <br>
 <footer>
   <div class="container-fluid">
     <div class="row">

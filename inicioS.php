@@ -16,8 +16,8 @@ if (isset($_SESSION['nombreUser'])) {
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <title>Registro</title>
+    <link rel="icon" href="img/sprtON_icon.ico">
+    <title>Inicio Session</title>
   </head>
   
 <body>
@@ -42,6 +42,10 @@ if (isset($_SESSION['nombreUser'])) {
             <li class="nav-item">
             <a class="nav-link disabled" href="#">Canchas</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="eventos.php">Eventos</a>
+              </li>
+              
             <li class='nav-item'>
                 <a class='nav-link' href='registro.php'>Registro</a>
             </li>

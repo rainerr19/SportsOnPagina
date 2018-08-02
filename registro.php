@@ -15,9 +15,9 @@ if (isset($_SESSION['nombreUser'])) {
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="img/sprtON_icon.ico">
     <title>Registro</title>
   </head>
-
    <header>
    <nav class="navbar  navbar-expand-md bg-dark navbar-dark" role="navigation">
         
@@ -39,6 +39,10 @@ if (isset($_SESSION['nombreUser'])) {
               <li class="nav-item">
               <a class="nav-link disabled" href="#">Canchas</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="eventos.php">Eventos</a>
+              </li>
+              
               <li class='nav-item'>
                   <a class='nav-link active' href='registro.php'>Registro</a>
               </li>
@@ -87,7 +91,7 @@ if (isset($_SESSION['nombreUser'])) {
 
           <div class="form-group">
             <label>Email </label>
-            <input type="email" name="email" class="form-control" placeholder="Email">
+            <input type="email" name="email" class="form-control" placeholder="Email" title="direccion de correo valido">
           </div> <!-- email -->
 
           <div class="form-group">
@@ -114,12 +118,12 @@ if (isset($_SESSION['nombreUser'])) {
           
           <div class="form-group">
             <label>Crea tu password</label>
-            <input type="password" class="form-control" name="password" placeholder="Nueva contraseña">
+            <input type="password" class="form-control" name="password" pattern=".{6,}" title="6 o mas caracteres" placeholder="Nueva contraseña">
           </div> <!-- contraseña.// -->  
 
           <div class="form-group">
               <label>Confirmacion de password</label>
-                <input class="form-control" type="password" name="confirm" placeholder="Confirme contraseña">
+                <input class="form-control" type="password" name="confirm" pattern=".{6,}" title="6 o mas caracteres" placeholder="Confirme contraseña">
           </div> <!-- confirmacion.// -->
 
           <div class="form-group">

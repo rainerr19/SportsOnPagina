@@ -19,9 +19,10 @@ if(!isset($_SESSION)){
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>SportsOn beta</title>
+    <link rel="icon" href="img/sprtON_icon.ico">
+    <title>Noticias SportsOn </title>
   </head>
-  <body>
+  <body style='background-color: whitesmoke;'>
   
  <header>
    <nav class="navbar  navbar-expand-md bg-dark navbar-dark" role="navigation">
@@ -68,7 +69,7 @@ if(!isset($_SESSION)){
                         <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown'>
                         $nom 
                         </a>
-                        <div class='dropdown-menu'>
+                        <div class='dropdown-menu dropdown-menu-right'>
                         <a class='dropdown-item' href='#'>Perfil</a>
                         <a class='dropdown-item' href='close.php'>Cerrar Sesion</a>
                         </div>

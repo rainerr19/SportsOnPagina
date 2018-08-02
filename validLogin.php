@@ -1,13 +1,13 @@
 <?php
   require 'Conexion.php';
-  require '/PHPMailer/PHPMailerAutoload.php';
+  require 'PHPMailer/PHPMailerAutoload.php';
   $mail = new PHPMailer;
   $mail->isSMTP();                                      // Set mailer to use SMTP
   $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
   $mail->SMTPAuth = true;                               // Enable SMTP authentication
   $mail->Username = 'sportsoncol@gmail.com';                 // SMTP username
   $mail->Password = 'barranquilla10';                           // SMTP password
-  $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+  $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, 'ssl' also accepted
   $mail->Port = 587;                                    // TCP port to connect to
   
  
@@ -31,6 +31,15 @@
       return $result->fetch(PDO::FETCH_ASSOC);
       $result->closeCursor();
     }
+    function insertPass($new, $email){
+      $stmt = "UPDATE usuarios SET contra = :new_p WHERE email = :email";
+      $result = self::$conn->prepare($stmt);
+      $result->execute(array(":email"=>$email, ":new_p"=>$new));//se verifica lo que se inserto
+      $conteo = $result->rowCount();//contar las filas que se seleccionan
+      return $conteo > 0 ? true : false;
+      $result->closeCursor();
+    }
+    //"UPDATE usuarios SET contra = :new_p WHERE email = :email";
     function Generate_password($largo){
       $cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
       $cadena_base .= '0123456789' ;
@@ -131,8 +140,10 @@
               </div>" ;
       }else{
         $login = new Login();
+        
         if($login->existsEmail($Email)){
           $password = $login-> Generate_password(8);
+          $login-> insertPass($new, $Email);
           $mensaje="
             <table  style='background-color:#f1f1f1;min-width:600px' width='100%' bgcolor='#f1f1f1'>
             <tr>

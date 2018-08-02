@@ -1,17 +1,12 @@
 /* clases dentro de jumbotron --> jumbotron.classname      */
-
 nav.navbar {
     margin-bottom: 0;
     background:#1d1d1b;
 }
 section.jumbotron1{
     margin-top: 1px;
-    background: #586E5F;
+    background: #7A0708;
     color: white;
-}
-section.jumbotron2{
-    margin-top: 4px;
-
 }
 /* canchass*/
 section.main{
@@ -62,7 +57,7 @@ th.cel-busy{
 div.transbox {
     margin: 10px;
     background-color: black;
-    opacity: 0.6;
+    opacity: 0.8;
     filter: alpha(opacity=60); /* For IE8 and earlier */
   }
 

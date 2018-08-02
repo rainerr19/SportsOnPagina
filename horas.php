@@ -17,9 +17,9 @@ if(!isset($_SESSION)){
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/misestilos.css" type="text/css">
-    <script src="js/jquery.js"></script>
     </script>
-    <title>Registro</title>
+    <link rel="icon" href="img/sprtON_icon.ico">
+    <title>Horario</title>
   </head>
   
 <body>
@@ -43,7 +43,9 @@ if(!isset($_SESSION)){
               <li class='nav-item active'>
                 <a class='nav-link' href="#">Canchas</a>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link" href="eventos.php">Eventos</a>
+              </li>
             <?php 
             if (!isset($_SESSION['nombreUser'])) {
               echo "
@@ -67,7 +69,7 @@ if(!isset($_SESSION)){
                     <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown'>
                        $nom 
                     </a>
-                    <div class='dropdown-menu'>
+                    <div class='dropdown-menu dropdown-menu-right'>
                       <a class='dropdown-item' href='#'>Perfil</a>
                       <a class='dropdown-item' href='close.php'>Cerrar Sesion</a>
                     </div>
@@ -196,6 +198,8 @@ $img = $b["imgen"];//img_brasil.png
     </div>
   </div>
 </footer>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script>
     //jquery--hover effect
       $(document).ready(function(){
@@ -278,8 +282,7 @@ $img = $b["imgen"];//img_brasil.png
         }
         
 </script>
- <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
 
 </body>
 

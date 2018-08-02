@@ -18,8 +18,8 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <title>SportsOn beta</title>
+    <link rel="icon" href="img/sprtON_icon.ico">
+    <title>Canchas SportsOn</title>
   </head>
   <body>
 
@@ -43,7 +43,9 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               <li class='nav-item active'>
                 <a class='nav-link' href="#">Canchas</a>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link" href="eventos.php">Eventos</a>
+              </li>
             <?php 
             if (!isset($_SESSION['nombreUser'])) {
               echo "
@@ -67,7 +69,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                     <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown'>
                        $nom 
                     </a>
-                    <div class='dropdown-menu'>
+                    <div class='dropdown-menu dropdown-menu-right'>
                       <a class='dropdown-item' href='#'>Perfil</a>
                       <a class='dropdown-item' href='close.php'>Cerrar Sesion</a>
                     </div>
