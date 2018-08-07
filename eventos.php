@@ -74,7 +74,7 @@ if(!isset($_SESSION)){
                         $nom 
                         </a>
                         <div class='dropdown-menu dropdown-menu-right'>
-                        <a class='dropdown-item' href='#'>Perfil</a>
+                        <a class='dropdown-item' href='perfil.php'>Perfil</a>
                         <a class='dropdown-item' href='close.php'>Cerrar Sesion</a>
                         </div>
                     </li>
@@ -171,8 +171,8 @@ if(!isset($_SESSION)){
         </div>
         <div class="col-md-2">  </div>
     </div>
+    </div>
 </div>
-
 <footer>
   <div class="container-fluid">
     <div class="row">

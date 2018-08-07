@@ -32,149 +32,104 @@ if(isset($_POST['bt_reg'])){
   $apellido = $_POST['lastname'];
   $age = $_POST['edad'];
   $celular = $_POST['cel'];
-  
-	
+  $mensaje = "";// mensaje de error
 	//$sexo = $_POST['opcion'];
- 
-
+  
+  
   if(empty($nombre)){
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong> Ingrese su nombre.
-          </div>" ;
+    $mensaje .= "<strong>Error!</strong> Ingrese su nombre.<br>";
     $validName = false;
   }else{
-		if (!preg_match("/^[a-zA-Z ]*$/",$nombre)) {
-      echo "<div class='alert alert-danger alert-dismissible'>
-              <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-              <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                <span aria-hidden='true'>&times;</span></button>
-              <strong>Error!</strong>Nombre no premitido. (solo se permiten letras y espacios)
-            </div>" ;
+    if (!preg_match("/^[a-zA-Z ]*$/",$nombre)) {
+      $mensaje .= "<strong>Error!</strong>Nombre no premitido. (solo se permiten letras y espacios)<br>";
 		  $validName = false;
 		}else{
-			$validName = true;
+      $validName = true;
 		}
   }
   if(empty($apellido)){
-
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong>	Ingrese su apellidos.
-          </div>";
+    $mensaje .= "<strong>Error!</strong>	Ingrese su apellidos<br>";
     $validApe = false;
   }else{
-	if (!preg_match("/^[a-zA-Z ]*$/",$apellido)) {
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong>Nombre no premitido. (solo se permiten letras y espacios)
-          </div>" ;
-		$validApe = false;
-	}else{
-			$validApe = true;
+    if (!preg_match("/^[a-zA-Z ]*$/",$apellido)) {
+      $mensaje .= "<strong>Error!</strong>Apellido no premitido. (solo se permiten letras y espacios)<br>";
+      $validApe = false;
+    }else{
+      $validApe = true;
+    }
   }
-}
-
-if(empty($correo)){
-  echo  "<div class='alert alert-danger alert-dismissible'>
-          <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-          <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-            <span aria-hidden='true'>&times;</span></button>
-          <strong>Error!</strong> Ingrese el correo.
-        </div>" ;
-  $validCorreo = false;
-}else{
   
-  if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-    echo "<div class='alert alert-danger alert-dismissible'>
-          <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-          <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-            <span aria-hidden='true'>&times;</span></button>
-          <strong>Error!</strong> Formato de correo invalido.
-          </div>" ;
+  if(empty($correo)){
+    $mensaje .= "<strong>Error!</strong> Ingrese el correo.<br>";
     $validCorreo = false;
   }else{
-    $validCorreo = true;
+    
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+      $mensaje .= "<strong>Error!</strong> Formato de correo invalido.<br>";      
+      $validCorreo = false;
+    }else{
+      $validCorreo = true;
+    }
+    
   }
-
-}
-
+  
   if(empty($age)){
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong> Ingrese su edad.
-          </div>";
+    $mensaje .= "<strong>Error!</strong> Ingrese su edad.<br>";      
     $validEdad = false;
   }else{
     $validEdad = true;
   }
   if(empty($celular)){
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong> Ingrese su numero celular.
-          </div>";
+    $mensaje .= " <strong>Error!</strong> Ingrese su numero celular.<br>"; 
     $validCel = false;
   }else{
     $validCel = true;
   }
   if(!isset($_POST['opcion'])){
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong> Ingrese genero.
-          </div>" ;
+    $mensaje .= " <strong>Error!</strong> Ingrese genero.<br>";
     $validSex = false;
   }else{
-	$sexo = $_POST['opcion'];
+    $sexo = $_POST['opcion'];
     $validSex = true;
   }
   if(empty($contra1)){
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong> Ingrese su contraseña.
-          </div>" ;
+    $mensaje .= " <strong>Error!</strong> Ingrese su contraseña.<br>";
     $validContra = false;
   }else{
     $validContra = true;
   }
   if(empty($contra2)){
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong> Ingrese la confirmacion de su contraseña.
-          </div>" ;
+    $mensaje .= "<strong>Error!</strong> Ingrese la confirmacion de su contraseña.<br>";     
     $validContra2 = false;
   }else{
     $validContra2 = true;
   }
-
+  
   if($contra1 != $contra2){
-    echo "<div class='alert alert-danger alert-dismissible'>
-            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span></button>
-            <strong>Error!</strong> Las contraseñas no coinciden.
-          </div>";
+    $mensaje .= "<strong>Error!</strong> Las contraseñas no coinciden.<br>";    
     $iguales = false;
   }else {
     $iguales = true;
   }
-
-
+  
+  if(isset($_POST['g-recaptcha-response'])&& $_POST['g-recaptcha-response']){  
+    //var_dump($_POST);         
+    $secret = "6LeolGgUAAAAAGNAeHkNQyBTrtF1VLILPfKng2D8";         
+    $ip = $_SERVER['REMOTE_ADDR'];         
+    $captcha = $_POST['g-recaptcha-response'];         
+    $rsp  = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip$ip");
+              //var_dump($rsp);         
+              $arr = json_decode($rsp,TRUE);         
+    if(!$arr['success']){   
+      $capt = FALSE;          
+      $mensaje .= "<strong>Error!</strong> SPAM.<br>";  
+    }            
+    $capt = TRUE;
+    }else {
+      $capt = FALSE;
+      $mensaje .= "<strong>Error!</strong> Confirmar que no eres un robot.<br>"; 
+    }
+  
   if($validName && $validApe && $validCel && $validEdad && $validSex && $validCorreo && $validContra && $iguales){
 		$registro = new Registrarse();//se crea el objeto para usar las funciones
 		if(!$registro->existsEmail($correo)){
@@ -203,6 +158,13 @@ if(empty($correo)){
               <strong>Error!</strong> Este correo ya existe.
             </div>";
 		}
+  }else{
+    echo" <div class='alert alert-danger alert-dismissible'>
+          <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+          <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span></button>
+          $mensaje
+        </div>";
   }
 }
 ?>

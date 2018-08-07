@@ -186,6 +186,7 @@ if (isset($_SESSION['nombreUser'])) {
 <script>
 $(document).ready(function(){
     $("#forgot").click(function(){
+        //$("#forgot").html(hidden);
         $.post("validLogin.php",
         {   btn_forgot: "1",
             mail: $("#mail").val()

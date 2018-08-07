@@ -14,6 +14,7 @@ if(!isset($_SESSION)){
     setcookie("cookieUserNombre","",time()*30*24*60*60,"/");
     session_destroy();
     header("location:index.php");
+    //echo "<script type='text/javascript'>window.location.href = 'index.php';</script>"
     exit;
 }
 ?>

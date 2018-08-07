@@ -15,6 +15,7 @@ if (isset($_SESSION['nombreUser'])) {
     <link rel="stylesheet" href="css/misestilos.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="icon" href="img/sprtON_icon.ico">
     <title>Registro</title>
   </head>
@@ -64,10 +65,12 @@ if (isset($_SESSION['nombreUser'])) {
 <body>
 
 <div class="container">
-     <?php
-        include "reg.php"
-        ?>
   <br>  
+     <?php
+
+        include "reg.php"
+      
+      ?>
   <hr>
   <div class="row justify-content-center">
     <div class="col-md-7">
@@ -108,7 +111,7 @@ if (isset($_SESSION['nombreUser'])) {
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Celular</label>
-              <input type="number" class="form-control" name="cel" placeholder="Celular">
+              <input type="number" class="form-control" name="cel" placeholder="Celular" min="1000000000">
             </div> <!-- celular.// -->
             <div class="form-group col-md-6">
               <label>Edad</label>
@@ -126,9 +129,14 @@ if (isset($_SESSION['nombreUser'])) {
                 <input class="form-control" type="password" name="confirm" pattern=".{6,}" title="6 o mas caracteres" placeholder="Confirme contraseña">
           </div> <!-- confirmacion.// -->
 
+            <div class="form-group">
+             
+            <div class="g-recaptcha" data-sitekey="6LeolGgUAAAAAKB7Gdh5bksfQ3St_BYs6UHGaa62"></div>
+                    
+            </div>    
           <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block" name="bt_reg"> Registrar  </button>
-          </div> <!-- form-group// -->      
+          </div> <!-- form-group// -->  
           <small class="text-muted">Al darle click en el Botton 'Registrar', Estarias confirmando los
               <br> Terminos y condiciones.</small>                                          
         </form>

@@ -76,7 +76,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                        $nom 
                     </a>
                     <div class='dropdown-menu dropdown-menu-right'>
-                      <a class='dropdown-item' href='#'>Perfil</a>
+                      <a class='dropdown-item' href='perfil.php'>Perfil</a>
                       <a class='dropdown-item' href='close.php'>Cerrar Sesion</a>
                     </div>
                   </li>
@@ -176,12 +176,20 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     </div>
 
     <section class="jumbotron jumbotron1">
-      <div class="container">
-        <h1>¿Quienes somos?</h1> 
+    <div class="container">
+        <h2>¿Quiénes somos?</h2> 
         <p>
-        Somos una empresa que proporciona información acerca de escenarios deportivos,
-        a través de una aplicación web, conectamos deportistas, practicantes
-        y aficionados al deporte con dueños de canchas deportivas.
+        Somos una plataforma deportiva que te conecta al mundo por medio del deporte.
+        </p>
+        <h3>Misión</h3> 
+        <p>
+        Fomentar, motivar e incentivar a las personas por medio de nuevas tecnología a hacer deporte y 
+        tener un estilo de vida más saludable.      
+        </p>
+        <h3>Visión</h3> 
+        <p>
+        <strong><i>SportsOn</i></strong> será una red social deportiva de clase mundial orientada a motivar,
+         fomentar e incentivar el deporte de manera sana y activa.       
         </p>
         </div>
     </section>
@@ -268,6 +276,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
     </div>
   </div>
   <br>
+  
 <footer>
   <div class="container-fluid">
     <div class="row">
