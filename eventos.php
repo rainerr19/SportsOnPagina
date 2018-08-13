@@ -104,8 +104,8 @@ if(!isset($_SESSION)){
                                 filtrar por:
                             </a>
                             <div class='dropdown-menu dropdown-menu-right'>
-                                <a class='dropdown-item' href='#'>Perfil</a>
-                                <a class='dropdown-item' href='#'>Cerrar Sesion</a>
+                                <a class='dropdown-item' href='#'>Fecha de publicación</a>
+                                <a class='dropdown-item' href='#'>Disponibles</a>
                             </div>
                         </li>
                     </ul>
@@ -113,27 +113,28 @@ if(!isset($_SESSION)){
             </div>
             <hr>
             <div class="card-group">
-            <?php 
+                <?php 
                     $ob = new noticiasYeventos();
-                //$conteo=$ob->numNoticias();//numero de noticias
-                $eventosRecientes=$ob->eventosRecientes(3);// numero de eventos a mostrar
+                    //$conteo=$ob->numNoticias();//numero de noticias
+                    $eventosRecientes=$ob->eventosRecientes(3);// numero de eventos a mostrar
                     // var_dump($noticiasRecientes[1]["id_noticia"]);
-                foreach($eventosRecientes as $evento){
-                    $i=$evento["id_evento"];
-                    $datos1 = $ob->datoEventos($i);
-                    $titulo = $datos1["titulo"];
-                    $res = $datos1["resumen"];
-                    $res = str_replace(PHP_EOL, '<br/>', $res);
-
-                    $fecha_post = date('d M Y - H:i',strtotime($datos1["fecha_post"]));
-                    $img1 = $datos1["evento_imagen1"];
-                    $src = "img\ eventos\ $i \ $img1";
-                    $src =  str_replace(' ', '', $src);
-                    // "<img class='img-thumbnail ' src='$src' style='max-height: 350px' alt='imagen de evento'>";
-                    $imgIN = "<img class='img-thumbnail ' src='$src' style='max-height: 300px' alt='imagen de evento'>";
-
-                    echo "
-                    <div class='container'>    
+                    foreach($eventosRecientes as $evento){
+                        $i=$evento["id_evento"];
+                        $datos1 = $ob->datoEventos($i);
+                        $titulo = $datos1["titulo"];
+                        $res = $datos1["resumen"];
+                        // $res = str_replace(PHP_EOL, '<br/>', $res);
+                        
+                        $fecha_post = date('d M Y - H:i',strtotime($datos1["fecha_post"]));
+                        $img1 = $datos1["evento_imagen1"];
+                        $src = "img\ eventos\ $i \ $img1";
+                        $src =  str_replace(' ', '', $src);
+                        // "<img class='img-thumbnail ' src='$src' style='max-height: 350px' alt='imagen de evento'>";
+                        $imgIN = "<img class='img-thumbnail ' src='$src' style='max-height: 300px' alt='imagen de evento'>";
+                        
+                        echo "
+                        <div class='container'> 
+                       
                         <div class='jumbotron bg-secondary'>
                             <div class='row'>
                                 <div class='text-center col-lg-4 col-md-12'>
@@ -141,36 +142,36 @@ if(!isset($_SESSION)){
                                 </div>
                                 <div class='col-lg-8 col-md-12'>
                                     <div class='card text-white bg-dark' >
-                                    <div class='card-header'>
-                                        <h4 class='card-title'>$titulo</h4>
-                                    </div>
+                                        <div class='card-header'>
+                                            <h4 class='card-title'>$titulo</h4>
+                                        </div>
 
-                                    <div class='card-body'>
+                                        <div class='card-body'>
 
-                                        <p class='card_text'>
-                                        $res
-                                        
-                                        </p>
-                                        <span class='post-fecha'>Publicación: $fecha_post </span>
-                                        <hr>
-                                        <form action='evento.php' method='get' role='form'>
-                                            <div class='btn-group btn-group-lg'>
-                                                <button type='submit' class='btn btn-info' name='btn-participar' value='1'>Mas Información</button>
-                                                <button type='submit' class='btn btn-primary' name='btn-participar' value='1'>Apartar</button>
-                                            </div>
-                                        </form>
+                                            <p class='card_text'>
+                                            $res
+                                            
+                                            </p>
+                                            <span class='post-fecha'>Publicación: $fecha_post </span>
+                                            <hr>
+                                            <form action='evento.php' method='get' role='form'>
+                                                <div class='btn-group btn-group-lg'>
+                                                    <button type='submit' class='btn btn-info' name='btn-participar' value='$i'>Mas Información</button>
+                                                    <button type='submit' class='btn btn-primary' name='btn-participar' value='$i'>Apartar</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                        ";
-                }
-                ?>
+                        </div>
+                        </div>
+                            ";
+                        }
+                        ?>
             </div>
         </div>
         <div class="col-md-2">  </div>
-    </div>
     </div>
 </div>
 <footer>

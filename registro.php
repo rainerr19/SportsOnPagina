@@ -84,17 +84,17 @@ if (isset($_SESSION['nombreUser'])) {
           <div class="form-row">
             <div class="col form-group">
               <label>Nombres </label>   
-                <input type="text" class="form-control" name="name" placeholder="Nombres">
+                <input type="text" class="form-control" name="name" placeholder="Nombres" required autofocus>
             </div> <!-- form-group end.// -->
             <div class="col form-group">
               <label>Apellidos</label>
-                <input type="text" class="form-control" name="lastname" placeholder="Apellidos">
+                <input type="text" class="form-control" name="lastname" placeholder="Apellidos" required>
             </div> <!-- form-group end.// -->
           </div> <!-- Nombres -->
 
           <div class="form-group">
             <label>Email </label>
-            <input type="email" name="email" class="form-control" placeholder="Email" title="direccion de correo valido">
+            <input type="email" name="email" class="form-control" placeholder="Email" title="direccion de correo valido" required>
           </div> <!-- email -->
 
           <div class="form-group">
@@ -111,22 +111,22 @@ if (isset($_SESSION['nombreUser'])) {
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Celular</label>
-              <input type="number" class="form-control" name="cel" placeholder="Celular" min="1000000000">
+              <input type="number" class="form-control" name="cel" placeholder="Celular" min="1000000000" required>
             </div> <!-- celular.// -->
             <div class="form-group col-md-6">
               <label>Edad</label>
-              <input type="number" class="form-control" name="edad" min="5" max="99"/>
+              <input type="number" class="form-control" name="edad" min="5" max="99" required>
             </div> <!-- Edad.// -->
           </div> <!-- Edad y cel.// -->
           
           <div class="form-group">
             <label>Crea tu password</label>
-            <input type="password" class="form-control" name="password" pattern=".{6,}" title="6 o mas caracteres" placeholder="Nueva contraseña">
+            <input type="password" class="form-control" name="password" pattern=".{6,}" title="6 o mas caracteres" placeholder="Nueva contraseña" required>
           </div> <!-- contraseña.// -->  
 
           <div class="form-group">
               <label>Confirmacion de password</label>
-                <input class="form-control" type="password" name="confirm" pattern=".{6,}" title="6 o mas caracteres" placeholder="Confirme contraseña">
+                <input class="form-control" type="password" name="confirm" pattern=".{6,}" title="6 o mas caracteres" placeholder="Confirme contraseña" required>
           </div> <!-- confirmacion.// -->
 
             <div class="form-group">

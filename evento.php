@@ -201,7 +201,7 @@ if(!isset($_SESSION)){
         <h1><?php echo $titulo; ?> </h1>
         <br>
             <figure class="figure"><!-- mayor a 400 x 300 -->
-                <img src="img\eventos\<?php echo $eventoID ?>\<?php echo $img1 ?>" class="figure-img img-fluid rounded">
+                <img src="img\eventos\<?php echo $eventoID ?>\<?php echo $img1 ?>" class="img-thumbnail" style='max-height: 420px'>
                 <hr>
             </figure> 
             <!-- <img src="..." class="img-fluid" alt="Responsive image"> -->
@@ -211,7 +211,8 @@ if(!isset($_SESSION)){
             </p>
             <p class="text-justify">
                 <?php
-                echo str_replace(PHP_EOL, '<br/>', $res);
+                // echo str_replace(PHP_EOL, '<br/>', $res);
+                echo $res;
                 ?>
             </p>
 

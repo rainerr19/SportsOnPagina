@@ -188,7 +188,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Contraseña Actual</label>
                             <div class="col-sm-9">
-                            <input type="password" class="form-control" name="passActual" pattern=".{4,}" title="6 o mas caracteres" placeholder="Nueva contraseña">
+                            <input type="password" class="form-control" name="passActual" pattern=".{6,}" title="6 o mas caracteres" placeholder="Nueva contraseña">
                             </div>
                         </div>
                         <div class="form-group row">

@@ -85,12 +85,12 @@ if (isset($_SESSION['nombreUser'])) {
                         <form role="form" method="post" action="">
                             <div class="form-group">
                                 <label>Usuario:</label> 
-                                <input id="mail" type="email" class="form-control" name="email" value="" placeholder="email">
+                                <input id="mail" type="email" class="form-control" name="email" value="" placeholder="email" required>
                             </div> 
 
                             <div class="form-group">
                                 <label>Contraseña:</label>  
-                                <input id="login-password" type="password" class="form-control" name="pass" placeholder="password">
+                                <input id="login-password" type="password" class="form-control" name="pass" placeholder="password" required>
                             </div> 
 
                             <div class="form-group">
