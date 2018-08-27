@@ -134,7 +134,7 @@ if(!isset($_SESSION)){
         }elseif($mes > 1){
             $fulldate = "Hace $mes Meses";
         }elseif($dia == 0 and $mes == 0 and $hora == 0){
-            $fulldate = "$dia $mes $hora Recientemente";
+            $fulldate = "Recientemente";
         }
         return $fulldate;
     }
@@ -156,7 +156,7 @@ if(!isset($_SESSION)){
     <div class="col-md-7"> 
         
         <figure class="figure"><!-- mayor a 400 x 300 -->
-            <img src="img\imgNews\<?php echo $noticiaID ?>\<?php echo $img1 ?>" class="figure-img img-fluid rounded">
+            <img src="img\imgNews\<?php echo $noticiaID ?>\<?php echo $img1 ?>" class="img-thumbnail" style='max-height: 500px'>
             <figcaption class="figure-caption text-right">
             <?php echo $pieImg1 ?>
             </figcaption>
@@ -169,7 +169,7 @@ if(!isset($_SESSION)){
         </p>
         <p class="text-justify">
             <?php
-            echo str_replace(PHP_EOL, '<br/>', $parrafo1);
+            echo $parrafo1;
             ?>
         </p>
         <?php
@@ -177,7 +177,7 @@ if(!isset($_SESSION)){
                 $src = "img\imgNews\ $noticiaID \ $img2";
                 $src =  str_replace(' ', '', $src);
                 echo "<figure class='figure'><!-- mayor a 400 x 300 -->
-                    <img src='$src' class='figure-img img-fluid rounded'>
+                    <img src='$src' class='img-thumbnail' style='max-height: 500px'>
                     <figcaption class='figure-caption text-right'>
                     $pieImg2 
                     </figcaption>
@@ -188,7 +188,8 @@ if(!isset($_SESSION)){
         ?>
         <p class="text-justify"> 
             <?php
-            echo str_replace(PHP_EOL, '<br/>', $parrafo2);
+            echo $parrafo2;
+            //echo str_replace(PHP_EOL, '<br/>', $parrafo2);
             ?>
         </p>
         <?php
@@ -196,7 +197,7 @@ if(!isset($_SESSION)){
                 $src = "img\imgNews\ $noticiaID \ $img3";
                 $src =  str_replace(' ', '', $src);
                 echo "<figure class='figure'><!-- mayor a 400 x 300 -->
-                    <img src='$src' class='figure-img img-fluid rounded'>
+                    <img src='$src' class='img-thumbnail' style='max-height: 500px'>
                     <figcaption class='figure-caption text-right'>
                     $pieImg3 
                     </figcaption>
@@ -207,7 +208,8 @@ if(!isset($_SESSION)){
         ?>
         <p class="text-justify">
             <?php
-            echo str_replace(PHP_EOL, '<br/>', $parrafo3);
+            echo $parrafo3;
+            //echo str_replace(PHP_EOL, '<br/>', $parrafo3);
             ?>
         </p>
         <br>
@@ -234,11 +236,12 @@ if(!isset($_SESSION)){
 
             // var_dump($noticiasRecientes[1]["id_noticia"]);
             foreach($noticiasRecientes as $noticia){
-                $i=$noticia["id_noticia"];
+                $i = $noticia["id_noticia"];
                 $datos1 = $ob->datoNoticias($i);
                 $titulo1 = $datos1["titulo"];
                 if ((is_null($titulo1) == FALSE) and ($i != $noticiaID) ){
                   $res1 = $datos1["resumen"];
+                  $fecha = $datos1["fecha"];
                   $fechas1 = fechas($fecha);
                     echo "    
                     <form action='noticia.php' method='get'>     
@@ -250,13 +253,13 @@ if(!isset($_SESSION)){
                             </div>
                             <p class='mb-1'> $res1</p>
                         </a>
-                    </from>
+                    </form>
                     ";
                 }
             }
             ?>
             </div>
-
+            <br>
         </div>
     </div>
 </div>

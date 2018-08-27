@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UFT-8">    
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <!-- texto español -->
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
-    <link rel="stylesheet" href="css/misestilos.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/editor.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" href="img/sprtON_icon.ico">
-    <title>SportsOnCol</title>
-  </head>
-  <body>
-      
-      <?php
+ <?php
 require 'DBadmin.php';
 if(isset($_POST["bt_subir"])){
     
@@ -127,47 +112,212 @@ if(isset($_POST['btn_buscar'])){
         $idEvento = $evento["id_evento"];
         $tituloEvento = $evento["titulo"];
         $postEvento = $evento["fecha_post"];
+        $img = $evento["evento_imagen1"];
         echo "evento  =  $idEvento <br>";
         echo "titulo  =  $tituloEvento <br>";
         echo "fecha de subida =  $postEvento";
+        echo "<input class='form-control' value='$img' name='idEvento' hidden>";
         echo "<input class='form-control' id='idEvento' value='$idEvento' name='idEvento' hidden>";
     }
 
 }
 
-function deleteDir($dirPath) {
-    if (! is_dir($dirPath)) {
-        throw new InvalidArgumentException("$dirPath must be a directory");
-    }
-    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
-        $dirPath .= '/';
-    }
-    $files = glob($dirPath . '*', GLOB_MARK);
-    foreach ($files as $file) {
-        if (is_dir($file)) {
-            self::deleteDir($file);
-        } else {
-            unlink($file);
-        }
-    }
-    rmdir($dirPath);
-}
-
 
 if(isset($_POST['btn_eliminar'])){
     $id_evento = $_POST['id_evento'];
-    
+    $arch = $_POST['imagen'];
     $admin = new Admin;
-    $dir="img/eventos/$id_evento/";
+    $dir="img/eventos/$id_evento/$arch";
+    $dirEmty="img/eventos/$id_evento/";
     //echo "eliminado.";
      if($admin->eliminarEvento($id_evento)){
-        deleteDir($dir);
+         unlink($dir);
+         rmdir($dirEmty);
          echo "Evento eliminado con éxito.";
          echo "<input class='form-control' id='idEvento' value='0' name='idEvento' hidden>";
      }else{echo "error en sql";}
 }
+
+///////////////////////////Noticias////////////////////////////////////////7777
+if(isset($_POST["bt_subir_new"])){
+    $error=FALSE;
+
+    $resumen = $_POST["editor1"];
+    $p1 = $_POST["editor2"];
+    
+    $titulo = $_POST["titulo"];
+    $sub = $_POST["sub"];
+    $p2 = $_POST["editor3"];
+    $p3 = $_POST["editor4"];
+    $p4 = $_POST["editor5"];
+    //$im1 = $_POST["img1"];
+    $pie1 =  $_POST["pie_foto1"];
+    //$im2 = $_POST["img2"];
+    $pie2 =  $_POST["pie_foto2"];
+    //$im3 = $_POST["img3"];
+    $pie3 =  $_POST["pie_foto3"];
+    $video =  $_POST["video"];
+    $autor = $_POST["autor"];
+    date_default_timezone_set("America/Mexico_City");    
+    $fecha_post= date("Y-m-d H:i:s");//fecha de subida
+
+    if(empty($resumen)){
+        $error = TRUE;
+        echo "<h1>resumen vacio</h1>";
+    }
+    if(empty($sub)){
+        $sub= NULL;
+    }
+    if(empty($p1)){
+        $error = TRUE;
+        echo "parrafo vacio.
+        ";
+    }
+    if(empty($p2)){
+        $p2= NULL;
+    }
+    if(empty($p3)){
+        $p3= NULL;
+    }
+    if(empty($p4)){
+        $p4= NULL;
+    }
+    if(empty($pie2)){
+        $pie2= NULL;
+    }
+    if(empty($pie3)){
+        $pie3= NULL;
+    }
+    if(empty($video)){
+        $video= NULL;
+    }else{
+        $find=strpos($video, "watch?v=");
+        if($find != FALSE){
+            $error==TRUE;
+            echo "error en formato del link del video";
+        }
+
+        
+    }
+    if($error==FALSE){
+        $admin = new Admin;
+       
+        // intval()//to int
+        $newID = (intval($admin->nuevoIDnews()))+1;
+        if (!file_exists("img/imgNews/$newID")) {
+            mkdir("img/imgNews/$newID", 0777, true);// se crea archivo
+        }
+        $formatos=array('.png','.jpg','.jpeg');
+        
+        $imgEr= FALSE;
+        $file_name=$_FILES["img1"]["name"];
+        $file_name_tmp=$_FILES["img1"]["tmp_name"];
+        if (!empty($_FILES["img2"]["name"])){
+            $file_name2=$_FILES["img2"]["name"];
+            $file_name_tmp2=$_FILES["img2"]["tmp_name"];
+            $dir_guardar="img/imgNews/$newID/$file_name2";
+             $dir = substr($file_name2,strrpos($file_name2,"."));
+            if(in_array($dir,$formatos)){
+                if (move_uploaded_file($file_name_tmp2,$dir_guardar)){
+                    echo "subido correctamente. imagen2";
+                }else{echo "error en subida de archivo img2";$imgEr= TRUE;}
+            }else{
+                echo "archivo no permitido imagen 2";
+                $imgEr= TRUE;
+            }
+        }else{$file_name2 = NULL;}
+        if (!empty($_FILES["img3"]["name"])){
+            $file_name3=$_FILES["img3"]["name"];
+            $file_name_tmp3=$_FILES["img3"]["tmp_name"];
+            $dir_guardar="img/imgNews/$newID/$file_name3";
+             $dir = substr($file_name3,strrpos($file_name3,"."));
+            if(in_array($dir,$formatos)){
+                if (move_uploaded_file($file_name_tmp2,$dir_guardar)){
+                    echo "subido correctamente. imagen 3";
+                }else{echo "error en subida de archivo img3";$imgEr= TRUE;}
+            }else{
+                echo "archivo no permitido imagen 3";
+                $imgEr= TRUE;
+            }
+        }else{$file_name3 = NULL;}
+        if($imgEr == FALSE){
+            $dir_guardar="img/imgNews/$newID/$file_name";
+            $dir = substr($file_name,strrpos($file_name,"."));
+            if(in_array($dir,$formatos)){
+                if (move_uploaded_file($file_name_tmp,$dir_guardar)){
+                    if($admin->insertNoticia($titulo,$sub,$resumen, $p1, $p2, $p3, $p4, $autor,$fecha_post, $file_name, $pie1,$file_name2,$pie2,$file_name3,$pie3,$video)){
+                        echo "nuevo id = $newID";
+                        echo "subido correctamente. <a href='admin.php'> Crear nueva Noticia<a>";
+                        
+                    }else{
+                        echo "error en sql";
+                    }
+                }else{echo "error en subida de archivo";}
+                
+            }else{
+                echo "archivo no permitido";
+            }
+            
+        }
+    }
+    
+}
+
+if(isset($_POST['btn_buscar_noticia'])){
+    $title_del = $_POST['del_title'];
+    $admin = new Admin;
+    $Noticia = $admin->getNoticia($title_del);
+    if(!$Noticia){
+        echo "<div class='alert alert-danger alert-dismissible'>
+        <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span></button>
+       Noticia no encontrado. (el titulo tiene que ser identico)
+       <input class='form-control' id='idNoticia' value='0' name='idNoticia' hidden>
+      </div>";
+    }else{
+        $idNoticia = $Noticia["id_noticia"];
+        $tituloNoticia = $Noticia["titulo"];
+        $postNoticia = $Noticia["fecha"];
+        echo "Noticia  =  $idNoticia <br>";
+        echo "titulo  =  $tituloNoticia <br>";
+        echo "fecha de subida =  $postNoticia";
+        echo "<input class='form-control' value='$tituloNoticia' id='titulo_de' hidden>";
+        echo "<input class='form-control' id='idNoticia' value='$idNoticia' name='idNoticia' hidden>";
+    }
+
+}
+
+
+if(isset($_POST['btn_eliminar_noticia'])){
+    $id_Noticia = $_POST['id_Noticia'];
+     $title_del = $_POST['titulo_del'];
+     $admin = new Admin;
+     $Noticia = $admin->getNoticia($title_del);
+     $img1=$Noticia["imagen1"];
+     $dir="img/imgNews/$id_Noticia/$img1";
+     $dirEmty="img/imgNews/$id_Noticia/";
+     unlink($dir);
+     
+     if($Noticia["imagen2"]!=NULL){
+        echo "eliminado imagen2";
+        $img2=$Noticia["imagen2"];
+        $dir="img/imgNews/$id_Noticia/$img2";
+        unlink($dir);
+    }
+    if($Noticia["imagen3"]!=NULL){
+        echo "eliminado imagen3";
+        $img3=$Noticia["imagen3"];
+        $dir="img/imgNews/$id_Noticia/$img3";
+        unlink($dir);
+    }
+        
+        //echo "eliminado. <br> <input class='form-control' id='idNoticia' value='0' name='idNoticia' hidden> ";
+     if($admin->eliminarNoticia($id_Noticia)){
+         rmdir($dirEmty);
+         echo "Evento eliminado con éxito.";
+         echo "<input class='form-control' id='idNoticia' value='0' name='idNoticia' hidden>";
+     }else{echo "error en sql";}
+}
+
 ?>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html>

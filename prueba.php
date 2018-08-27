@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UFT-8">    
+  <head>  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <!-- texto español -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
     <link rel="stylesheet" href="css/misestilos.css">
@@ -57,116 +56,85 @@
 <br>
 <hr>
  <div class="container">
-     <h1>eventos</h1>
+     <h1>Noticias</h1>
     
     <form role='form' method='post' action='mensaje.php' enctype='multipart/form-data'>
         <div class='form-group'>
-        <label >titulo</label>
-        <input type='text' class='form-control' placeholder='titulo' maxlength='45' name='titulo' title='maximo 45 caracteres' required>
+            <label >titulo</label>
+            <input type='text' class='form-control' placeholder='titulo' maxlength='200' name='titulo' title='maximo 200 caracteres' required>
+        </div>
+        <div class='form-group'>
+            <label >Subtitulo (opcional)</label>
+            <input type='text' class='form-control' placeholder='subtitulo' maxlength='200' name='sub' title='maximo 200 caracteres'>
         </div>
         <div class='form-group'>
             <label>resumen</label>
             <textarea class='form-control ckeditor' id='txt_res' name='editor1'></textarea>
         </div>
         <div class='form-group'>
-            <label for='Select1'>Tipo</label>
-            
-            <select class='form-control' id='Select1' name='tipo'>
-                <option>futbol</option>
-                <option>otros</option>
-            </select>
-    
+            <label for='exampleFormControlFile1'>Imagen principal de la Noticia </label>
+            <input type='file' class='form-control-file' name='img1' required>
         </div>
         <div class='form-group'>
-            <label for='Select2'>Genero</label>
-            
-            <select class='form-control' id='Select2' name='gender'>
-                <option>NULL</option>
-                <option>Femenino</option>
-                <option>Masculino</option>
-            </select>
-    
+            <label >pie de foto de imagen (colocar autor de foto.)</label>
+            <input type='text' class='form-control' placeholder='pie de foto' maxlength='200' name='pie_foto1' required>
         </div>
         <div class='form-group'>
-            <label>valor( 0 'cero' si es gratis )</label>
-            <input type='number' class='form-control' name='valor' required>
-        </div> 
-        <div class='form-group'>
-            <label>edad minima</label>
-            <input type='number' class='form-control' name='min' min='5' max='99'required>
-        </div> 
-        <div class='form-group'>
-            <label>edad maxima</label>
-            <input type='number' class='form-control' name='max' min='5' max='99' required>
+            <label>Parrafo1</label>
+            <textarea class='form-control ckeditor' id='txt_p1' name='editor2'></textarea>
         </div>
         <div class='form-group'>
-            <label>Duracion del evento (horas)</label>
-            <input type='number' class='form-control' min='1' name='duracion' required>
+            <label for='exampleFormControlFile1'>Imagen entre parrafos (opcional) </label>
+            <input type='file' class='form-control-file' name='img2'>
         </div>
         <div class='form-group'>
-            <label>limite de personas</label>
-            <input type='number' class='form-control' min='2' name='limite_personas' required>
-        </div>
-        <div class='form-row'>
-            <div class='col form-group'>
-                <label>fecha y hora limite de inscripcion</label>
-            </div>
-            <div class='col form-group'>
-                
-                <input type='date' class='form-control' name='fecha_limite' required>
-                <input type='time' class='form-control' name='hora_limite' required>
-            </div>
-        </div>
-        <div class='form-row'>
-            <div class='col form-group'>
-                <label>fecha y hora del evento</label>
-            </div>
-            <div class='col form-group'>
-                
-                <input type='date' class='form-control' name='fecha_evn' required>
-                <input type='time' class='form-control' name='hora_evn' required>
-            </div>
+            <label >pie de foto de imagen 2 (colocar autor de foto. opcional)</label>
+            <input type='text' class='form-control' placeholder='pie de foto' maxlength='200' name='pie_foto2'>
         </div>
         <div class='form-group'>
-        <label >direccion</label>
-        <input type='text' class='form-control' maxlength='45' name='direccion' required>
+            <label>Parrafo2(opcional)</label>
+            <textarea class='form-control ckeditor' id='txt_p2' name='editor3'></textarea>
         </div>
         <div class='form-group'>
-        <label >link mapa google</label>
+            <label for='exampleFormControlFile1'>Imagen 3 entre parrafos (opcional) </label>
+            <input type='file' class='form-control-file' name='img3'>
+        </div>
+        <div class='form-group'>
+            <label >pie de foto de imagen 3 (colocar autor de foto. opcional)</label>
+            <input type='text' class='form-control' placeholder='pie de foto' maxlength='200' name='pie_foto3'>
+        </div>
+        <div class='form-group'>
+            <label>Parrafo3(opcional)</label>
+            <textarea class='form-control ckeditor' id='txt_p3' name='editor4'></textarea>
+        </div>
+        <div class='form-group'>
+            <label>Parrafo4 (opcional)</label>
+            <textarea class='form-control ckeditor' id='txt_p4' name='editor5'></textarea>
+        </div>
+       
+        <div class='form-group'>
+        <label >link de video (opcional)</label>
+        <label >Importante solo cambiar el codigo del link </label>
         <input type='text' class='form-control' 
-            placeholder='<iframe src=  allowfullscreen></iframe>'
-            name='ubicacion' required>
-        </div>
-        
-        <div class='form-group'>
-            <label >encargado</label>
-            <input type='text' class='form-control' name='encar' required>
+            placeholder='https://www.youtube.com/embed/AFXe9XuUT4o'
+            name='video'>
         </div>
         <div class='form-group'>
-            <label>Celular(opcional)</label>
-            <input type='number' class='form-control' name='cel' placeholder='Celular' min='1000000000'>
-        </div> 
-    
-        <div class='form-group'>
-        <label for='exampleFormControlFile1'>subir imagen del evento</label>
-        <input type='file' class='form-control-file' name='img' required>
+            <label >Auto de la redacción</label>
+            <input type='text' class='form-control' name='autor' required>
         </div>
+
         <div class='form-group'>
-        <label>Extra requisito (opcional)</label>
-        <textarea class='form-control ckeditor' id='txt_res2' name='editor2'></textarea>
-    </div>
-    
-        <div class='form-group'>
-            <button type='submit' class='btn btn-primary' name='bt_subir'> Subir a paguina  </button>
+            <button type='submit' class='btn btn-primary' name='bt_subir_new'> Subir a paguina  </button>
         </div> 
     </form>
     <hr>
     <nav class="navbar navbar-light bg-light justify-content-between">
-     <a class="navbar-brand">Eliminar evento por nombre <br>(buscar nombre de evento a eliminar)</a>
+     <a class="navbar-brand">Eliminar Noticia por nombre <br>(buscar nombre de la Noticia a eliminar)</a>
     <!-- <a class="navbar-brand"> (buscar nombre de evento a eliminar)</a> -->
     <form class="form-inline">
-        <input class='form-control mr-sm-3' id='del_title' placeholder='buscar' maxlength='45' required>
-        <button type='button' class='btn btn-outline-danger my-3 my-sm-0' id='buscar'>Eliminar</button>
+        <input class='form-control mr-sm-3' id='del_title' placeholder='buscar' maxlength='200' required>
+        <button type='button' class='btn btn-outline-danger my-3 my-sm-0' value="1" id='buscar'>Eliminar</button>
     </form>
     </nav>
 </div>
@@ -181,16 +149,16 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form role="form" method="post" action="">
+      <!-- <form role="form" method="post" action=""> -->
         <div class="modal-body">
             <div class="container" id="mensaje">
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-secondary" data-dismiss="modal" >Close</button>
-            <button class="btn btn-danger" data-dismiss="modal" id="eliminar" >Eliminar</button>
+            <button type="button" class="btn btn-danger" id="eliminar" >Eliminar</button>
         </div>
-      </form>
+      <!-- </form> -->
     </div>
   </div>
 </div>
@@ -203,55 +171,110 @@
 $(document).ready(function(){
     $("#buscar").click(function(){
         //$("#forgot").html(hidden);
+        
         if ($('#del_title').val() != "") {
-            
+            if($('#buscar').val()==1){
+            //console.log("noticia");
             $.post("mensaje.php",
-            {   btn_buscar: "1",
-                del_title: $('#del_title').val()
-            },
-        function(data, status){
-            if(status=="success"){
-                //console.log(data);
-                $("#mensaje").html(data);
-                if($('#idEvento').val()==0){
-                    $("#eliminar").attr({
-                        "id" : "eliminar",
-                        "class" : "btn btn-danger",
-                        "disabled": ""
-                    });
-                }else{$("#eliminar").removeAttr("disabled")}
-                $('#Modal').modal('show');
-            }else{alert("ERROR: response");};
+                {   btn_buscar_noticia: "1",
+                    del_title: $('#del_title').val()
+                },
+                function(data, status){
+                    if(status=="success"){
+                        //console.log(data);
+                        $("#mensaje").html(data);
+                        if($('#idNoticia').val()==0){
+                            $("#eliminar").attr({
+                                "id" : "eliminar",
+                                "class" : "btn btn-danger",
+                                "disabled": ""
+                            });
+                        }else{$("#eliminar").removeAttr("disabled")}
+                        $('#Modal').modal('show');
+                    }else{alert("ERROR: response");};
 
-        });
+                });
+            }else{
+                //console.log("evento");
+                $.post("mensaje.php",
+                {   btn_buscar: "1",
+                    del_title: $('#del_title').val()
+                },
+                function(data, status){
+                    if(status=="success"){
+                        //console.log(data);
+                        $("#mensaje").html(data);
+                        if($('#idEvento').val()==0){
+                            $("#eliminar").attr({
+                                "id" : "eliminar",
+                                "class" : "btn btn-danger",
+                                "disabled": ""
+                            });
+                        }else{$("#eliminar").removeAttr("disabled")}
+                        $('#Modal').modal('show');
+                    }else{alert("ERROR: response");};
+
+                });
+            }
         }
 
     });
     $("#eliminar").click(function(){
-        
-        if ($('#idEvento').val() != "") {
+        if($('#buscar').val()==1){
             
-            $.post("mensaje.php",
-            {   btn_eliminar: "1",
-                id_evento: $('#idEvento').val()
-            },
-        function(data, status){
-            if(status=="success"){
-                //console.log(data);
-                $("#mensaje").html(data);
-                if($('#idEvento').val()==0){
-                    $("#eliminar").attr({
-                        "id" : "eliminar",
-                        "class" : "btn btn-danger",
-                        "disabled": ""
-                    });
-                }else{$("#eliminar").removeAttr("disabled")}
+            if ($('#idNotica').val() != "") {
+                
+                $.post("mensaje.php",
+                {   btn_eliminar_noticia: "1",
+                    id_Noticia: $('#idNoticia').val(),
+                    titulo_del: $('#del_title').val()
+                },
+            function(data, status){
+                if(status=="success"){
+                    //console.log(data);
+                    $("#mensaje").html(data);
+                    if($('#idNoticia').val()==0){
+                        $("#eliminar").attr({
+                            "id" : "eliminar",
+                            "class" : "btn btn-danger",
+                            "disabled": ""
+                        });
+                    }else{$("#eliminar").removeAttr("disabled")}
                 $('#Modal').modal('show');
-            }else{alert("ERROR: response");};
+                    //console.log("hola");
+                }else{alert("ERROR: response");};
 
-        });
+            });
+            }
+
+        }else{
+            
+            if ($('#idEvento').val() != "") {
+                
+                $.post("mensaje.php",
+                {   btn_eliminar: "1",
+                    imagen: $('#img').val(),
+                    id_evento: $('#idEvento').val()
+                },
+            function(data, status){
+                if(status=="success"){
+                    //console.log(data);
+                    $("#mensaje").html(data);
+                    if($('#idEvento').val()==0){
+                        $("#eliminar").attr({
+                            "id" : "eliminar",
+                            "class" : "btn btn-danger",
+                            "disabled": ""
+                        });
+                    }else{$("#eliminar").removeAttr("disabled")}
+                    $('#Modal').modal('show');
+                }else{alert("ERROR: response");};
+
+            });
+            }
+
         }
-
+        //$('#Modal').modal('show');
     });
 });
 
@@ -268,6 +291,25 @@ CKEDITOR.replace( 'editor1', {
  
 } );
 CKEDITOR.replace( 'editor2', {
+  toolbar: [
+    { name: 'document', items: [ 'Undo', 'Redo' ] },
+    { name: 'styles', items: [ 'Format' ] },
+    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+    { name: 'links', items: [ 'Link', 'Unlink' ] }
+  ]
+ 
+} );
+CKEDITOR.replace( 'editor3', {
+  toolbar: [
+    { name: 'document', items: [ 'Undo', 'Redo' ] },
+    { name: 'styles', items: [ 'Format' ] },
+    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+    { name: 'links', items: [ 'Link', 'Unlink' ] }
+  ]
+ 
+} );CKEDITOR.replace( 'editor4', {
   toolbar: [
     { name: 'document', items: [ 'Undo', 'Redo' ] },
     { name: 'styles', items: [ 'Format' ] },

@@ -12,8 +12,7 @@ if (isset($_SESSION['email'])){
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UFT-8">    
+<head>  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <!-- texto español -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1, minimun-scale=1">
     <link rel="stylesheet" href="css/misestilos.css">
@@ -68,13 +67,23 @@ if (isset($_SESSION['email'])){
        <div class="row">
            <div class="col-md-3"></div>
            <div class="col-md-6" style="padding-top: .35rem">
+           
+                    <label for="Select1" class="sr-only">Agrgar: </label>
                <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+                        <div class="col-sm-9">
+                            <select class="form-control" id="Select1" name='agregar'>
+                                <option>Eventos</option>
+                                <option>Noticias</option>
+                           
+                  
+                            </select>
+                        </div> 
                    <!-- <label class="form-check-label">
                        <input class="form-check-input" name="remember"
                                type="checkbox" >
                        <span style="padding-bottom: .15rem">Remember me</span>
                    </label> -->
-               </div>
+               </div>  
            </div>
        </div>
        <div class="row" style="padding-top: 1rem">
@@ -109,7 +118,7 @@ if (isset($_SESSION['email'])){
         </div>
         <div class="modal-footer">
             <button class="btn btn-secondary" data-dismiss="modal" >Close</button>
-            <button class="btn btn-danger" data-dismiss="modal" id="eliminar" >Eliminar</button>
+            <button class="btn btn-danger" id="eliminar" >Eliminar</button>
         </div>
       </form>
     </div>
@@ -124,55 +133,110 @@ if (isset($_SESSION['email'])){
 $(document).ready(function(){
     $("#buscar").click(function(){
         //$("#forgot").html(hidden);
+        
         if ($('#del_title').val() != "") {
-            
+            if($('#buscar').val()==1){
+            //console.log("noticia");
             $.post("mensaje.php",
-            {   btn_buscar: "1",
-                del_title: $('#del_title').val()
-            },
-        function(data, status){
-            if(status=="success"){
-                //console.log(data);
-                $("#mensaje").html(data);
-                if($('#idEvento').val()==0){
-                    $("#eliminar").attr({
-                        "id" : "eliminar",
-                        "class" : "btn btn-danger",
-                        "disabled": ""
-                    });
-                }else{$("#eliminar").removeAttr("disabled")}
-                $('#Modal').modal('show');
-            }else{alert("ERROR: response");};
+                {   btn_buscar_noticia: "1",
+                    del_title: $('#del_title').val()
+                },
+                function(data, status){
+                    if(status=="success"){
+                        //console.log(data);
+                        $("#mensaje").html(data);
+                        if($('#idNoticia').val()==0){
+                            $("#eliminar").attr({
+                                "id" : "eliminar",
+                                "class" : "btn btn-danger",
+                                "disabled": ""
+                            });
+                        }else{$("#eliminar").removeAttr("disabled")}
+                        $('#Modal').modal('show');
+                    }else{alert("ERROR: response");};
 
-        });
+                });
+            }else{
+                //console.log("evento");
+                $.post("mensaje.php",
+                {   btn_buscar: "1",
+                    del_title: $('#del_title').val()
+                },
+                function(data, status){
+                    if(status=="success"){
+                        //console.log(data);
+                        $("#mensaje").html(data);
+                        if($('#idEvento').val()==0){
+                            $("#eliminar").attr({
+                                "id" : "eliminar",
+                                "class" : "btn btn-danger",
+                                "disabled": ""
+                            });
+                        }else{$("#eliminar").removeAttr("disabled")}
+                        $('#Modal').modal('show');
+                    }else{alert("ERROR: response");};
+
+                });
+            }
         }
 
     });
     $("#eliminar").click(function(){
-        
-        if ($('#idEvento').val() != "") {
+        if($('#buscar').val()==1){
             
-            $.post("mensaje.php",
-            {   btn_eliminar: "1",
-                id_evento: $('#idEvento').val()
-            },
-        function(data, status){
-            if(status=="success"){
-                //console.log(data);
-                $("#mensaje").html(data);
-                if($('#idEvento').val()==0){
-                    $("#eliminar").attr({
-                        "id" : "eliminar",
-                        "class" : "btn btn-danger",
-                        "disabled": ""
-                    });
-                }else{$("#eliminar").removeAttr("disabled")}
+            if ($('#idNotica').val() != "") {
+                
+                $.post("mensaje.php",
+                {   btn_eliminar_noticia: "1",
+                    id_Noticia: $('#idNoticia').val(),
+                    titulo_del: $('#del_title').val()
+                },
+            function(data, status){
+                if(status=="success"){
+                    //console.log(data);
+                    $("#mensaje").html(data);
+                    if($('#idNoticia').val()==0){
+                        $("#eliminar").attr({
+                            "id" : "eliminar",
+                            "class" : "btn btn-danger",
+                            "disabled": ""
+                        });
+                    }else{$("#eliminar").removeAttr("disabled")}
                 $('#Modal').modal('show');
-            }else{alert("ERROR: response");};
+                    //console.log("hola");
+                }else{alert("ERROR: response");};
 
-        });
+            });
+            }
+
+        }else{
+            
+            if ($('#idEvento').val() != "") {
+                
+                $.post("mensaje.php",
+                {   btn_eliminar: "1",
+                    imagen: $('#img').val(),
+                    id_evento: $('#idEvento').val()
+                },
+            function(data, status){
+                if(status=="success"){
+                    //console.log(data);
+                    $("#mensaje").html(data);
+                    if($('#idEvento').val()==0){
+                        $("#eliminar").attr({
+                            "id" : "eliminar",
+                            "class" : "btn btn-danger",
+                            "disabled": ""
+                        });
+                    }else{$("#eliminar").removeAttr("disabled")}
+                    $('#Modal').modal('show');
+                }else{alert("ERROR: response");};
+
+            });
+            }
+
         }
-
+        //$('#Modal').modal('show');
     });
 });
 
@@ -189,6 +253,25 @@ CKEDITOR.replace( 'editor1', {
  
 } );
 CKEDITOR.replace( 'editor2', {
+  toolbar: [
+    { name: 'document', items: [ 'Undo', 'Redo' ] },
+    { name: 'styles', items: [ 'Format' ] },
+    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+    { name: 'links', items: [ 'Link', 'Unlink' ] }
+  ]
+ 
+} );
+CKEDITOR.replace( 'editor3', {
+  toolbar: [
+    { name: 'document', items: [ 'Undo', 'Redo' ] },
+    { name: 'styles', items: [ 'Format' ] },
+    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+    { name: 'links', items: [ 'Link', 'Unlink' ] }
+  ]
+ 
+} );CKEDITOR.replace( 'editor4', {
   toolbar: [
     { name: 'document', items: [ 'Undo', 'Redo' ] },
     { name: 'styles', items: [ 'Format' ] },
