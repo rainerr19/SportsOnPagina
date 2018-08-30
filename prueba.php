@@ -56,112 +56,62 @@
 <br>
 <hr>
  <div class="container">
-     <h1>Noticias</h1>
-    
-    <form role='form' method='post' action='mensaje.php' enctype='multipart/form-data'>
-        <div class='form-group'>
-            <label >titulo</label>
-            <input type='text' class='form-control' placeholder='titulo' maxlength='200' name='titulo' title='maximo 200 caracteres' required>
-        </div>
-        <div class='form-group'>
-            <label >Subtitulo (opcional)</label>
-            <input type='text' class='form-control' placeholder='subtitulo' maxlength='200' name='sub' title='maximo 200 caracteres'>
-        </div>
-        <div class='form-group'>
-            <label>resumen</label>
-            <textarea class='form-control ckeditor' id='txt_res' name='editor1'></textarea>
-        </div>
-        <div class='form-group'>
-            <label for='exampleFormControlFile1'>Imagen principal de la Noticia </label>
-            <input type='file' class='form-control-file' name='img1' required>
-        </div>
-        <div class='form-group'>
-            <label >pie de foto de imagen (colocar autor de foto.)</label>
-            <input type='text' class='form-control' placeholder='pie de foto' maxlength='200' name='pie_foto1' required>
-        </div>
-        <div class='form-group'>
-            <label>Parrafo1</label>
-            <textarea class='form-control ckeditor' id='txt_p1' name='editor2'></textarea>
-        </div>
-        <div class='form-group'>
-            <label for='exampleFormControlFile1'>Imagen entre parrafos (opcional) </label>
-            <input type='file' class='form-control-file' name='img2'>
-        </div>
-        <div class='form-group'>
-            <label >pie de foto de imagen 2 (colocar autor de foto. opcional)</label>
-            <input type='text' class='form-control' placeholder='pie de foto' maxlength='200' name='pie_foto2'>
-        </div>
-        <div class='form-group'>
-            <label>Parrafo2(opcional)</label>
-            <textarea class='form-control ckeditor' id='txt_p2' name='editor3'></textarea>
-        </div>
-        <div class='form-group'>
-            <label for='exampleFormControlFile1'>Imagen 3 entre parrafos (opcional) </label>
-            <input type='file' class='form-control-file' name='img3'>
-        </div>
-        <div class='form-group'>
-            <label >pie de foto de imagen 3 (colocar autor de foto. opcional)</label>
-            <input type='text' class='form-control' placeholder='pie de foto' maxlength='200' name='pie_foto3'>
-        </div>
-        <div class='form-group'>
-            <label>Parrafo3(opcional)</label>
-            <textarea class='form-control ckeditor' id='txt_p3' name='editor4'></textarea>
-        </div>
-        <div class='form-group'>
-            <label>Parrafo4 (opcional)</label>
-            <textarea class='form-control ckeditor' id='txt_p4' name='editor5'></textarea>
-        </div>
-       
-        <div class='form-group'>
-        <label >link de video (opcional)</label>
-        <label >Importante solo cambiar el codigo del link </label>
-        <input type='text' class='form-control' 
-            placeholder='https://www.youtube.com/embed/AFXe9XuUT4o'
-            name='video'>
-        </div>
-        <div class='form-group'>
-            <label >Auto de la redacción</label>
-            <input type='text' class='form-control' name='autor' required>
-        </div>
-
-        <div class='form-group'>
-            <button type='submit' class='btn btn-primary' name='bt_subir_new'> Subir a paguina  </button>
-        </div> 
-    </form>
-    <hr>
-    <nav class="navbar navbar-light bg-light justify-content-between">
-     <a class="navbar-brand">Eliminar Noticia por nombre <br>(buscar nombre de la Noticia a eliminar)</a>
-    <!-- <a class="navbar-brand"> (buscar nombre de evento a eliminar)</a> -->
-    <form class="form-inline">
-        <input class='form-control mr-sm-3' id='del_title' placeholder='buscar' maxlength='200' required>
-        <button type='button' class='btn btn-outline-danger my-3 my-sm-0' value="1" id='buscar'>Eliminar</button>
-    </form>
-    </nav>
-</div>
-<hr>
-<br>
-<div class="modal fade" tabindex="-1" role="dialog" id="Modal">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Eliminar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- <form role="form" method="post" action=""> -->
-        <div class="modal-body">
-            <div class="container" id="mensaje">
+     <h1>Escenarios deportivos</h1>
+    <div class="card-deck">
+     
+        <div class="card bg-secondary">
+            <img class="card-img-top" src="img/img_brasil.png" alt="Card image" style="max-height: 300px;width:100%">
+            <div class="card-body">
+            <h4 class="card-title">imagen prueba</h4>
+            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+            <a href="#" class="btn btn-primary">See more</a>
             </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" data-dismiss="modal" >Close</button>
-            <button type="button" class="btn btn-danger" id="eliminar" >Eliminar</button>
+        <div class="card bg-secondary">
+            <img class="card-img-top" src="img/img_hebreo.jpg" alt="Card image" style="max-height: 300px;width:100%">
+            <div class="card-body">
+            <h4 class="card-title">imagen prueba2</h4>
+            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+            <a href="#" class="btn btn-primary">See more</a>
+            </div>
         </div>
-      <!-- </form> -->
+        <div class="card bg-secondary">
+            <img class="card-img-top" src="img/ppp.png" alt="Card image" style="max-height: 300px;width:100%">
+            <div class="card-body">
+            <h4 class="card-title">imagen prueba3</h4>
+            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+            <a href="#" class="btn btn-primary">See more</a>
+            </div>
+        </div>
+
+        
     </div>
-  </div>
+    <br>
+    <div class='card-deck'>
+     
+        <div class='card bg-secondary'>
+            <img class='card-img-top' src='img/img_hebreo.jpg' alt='Card image' style='max-height: 300px;width:100%'>
+            <div class='card-body'>
+            <h4 class='card-title'>imagen prueba2</h4>
+            <p class='card-text'>Some example text some example text. John Doe is an architect and engineer</p>
+            <a href='#' class='btn btn-primary'>See more</a>
+            </div>
+        </div>
+        <div class='card bg-secondary'>
+            <img class='card-img-top' src='img/ppp.png' alt='Card image' style='max-height: 300px;width:100%'>
+            <div class='card-body'>
+            <h4 class='card-title'>imagen prueba3</h4>
+            <p class='card-text'>Some example text some example text. John Doe is an architect and engineer</p>
+            <a href='#' class='btn btn-primary'>See more</a>
+            </div>
+        </div>
+        <div class='card'>
+        </div>
+
+    </div>
 </div>
+<hr>
+
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>

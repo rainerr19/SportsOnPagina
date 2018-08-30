@@ -45,7 +45,7 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               </li>
               
               <li class="nav-item">
-                <a class="nav-link disabled" href="#">Canchas</a>
+                <a class="nav-link" href="canchas.php">Canchas</a>
               </li>
              
               <li class="nav-item">

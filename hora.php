@@ -22,6 +22,30 @@ class canchas extends Conexion{
         return $datos ;
         $result->closeCursor();
       }
+      function idTodasCanchas(){
+        $stmt = "SELECT id_canchas FROM canchas ORDER BY id_canchas";
+        $result = self::$conn->prepare($stmt);
+        $result->execute();//ejcutar 
+        $datos = []; 
+        while ($row = ($result->fetch(PDO::FETCH_ASSOC))){
+          $datos[] = $row;
+        }
+        
+        return $datos ;
+        $result->closeCursor();
+      }
+      function futbol(){
+        $stmt = "SELECT id_canchas FROM canchas WHERE tipo='Futbol' OR tipo='Mixto'";
+        $result = self::$conn->prepare($stmt);
+        $result->execute();//ejcutar 
+        $datos = []; 
+        while ($row = ($result->fetch(PDO::FETCH_ASSOC))){
+          $datos[] = $row;
+        }
+        
+        return $datos ;
+        $result->closeCursor();
+      }
       function dateUpdate($now, $ocup, $canchaID){
           //UPDATE `canchas` SET `ocupacion` = '1011L1819M09-12I0809S07-09D', `fecha_g` = '2018-05-26 17:00:00' WHERE `canchas`.`id_canchas` = 1;
           $data=['actual'=>$now, 'prestamo'=>$ocup, 'id'=>$canchaID];
@@ -275,13 +299,147 @@ function actualiza(){
     }
 
 }
-// date_default_timezone_set("America/Mexico_City");
-// echo "Today is " . date("d l H:i");//L--> minuscula semana
-// echo "<br>";
-// $startdate=strtotime("now");
-// $enddate=strtotime("+24 hour", $startdate);
-// while ($startdate < $enddate) {
-//   echo date("l H", $startdate)."<br>";
-//   $startdate = strtotime("+1 hour", $startdate);
-// }
+function Equirectangular($lat1,$lng1,$lat2,$lng2){
+    $lng1 = abs($lng1);
+    $lng2 = abs($lng2);
+    $alpha = $lng2-$lng1;
+    $x = deg2rad($alpha) * cos(deg2rad($lat1+$lat2)/2);
+    $y = deg2rad($lat1-$lat2);
+    $R = 6372.8; // gives d in km
+    $distance = sqrt($x*$x + $y*$y) * $R;
+    return $distance;
+    }
+if(isset($_POST['pos'])){
+    $la = $_POST['lati'];
+    $lo = $_POST['lon'];
+    $o = new canchas();
+    $todas=$o->idTodasCanchas();// id e cancha mostrar
+     
+      $ordenID=array(array(),array());
+      $ordenDis=array();
+      foreach($todas as $cancha){
+        $g = $o->datoCanchas($cancha["id_canchas"]);
+        $valor = $g["ubicacion"];
+        $dis = Equirectangular($la,$lo,substr($valor, 0,9),substr($valor, 10,21));
+        array_push($ordenID[0],$cancha["id_canchas"]);
+        array_push($ordenID[1],$dis);
+        array_push($ordenDis,$dis);
+      }
+sort($ordenDis);
+//echo($ordenDis);
+$idArray = array();
+for ($i=0; $i < sizeof($ordenDis); $i++) { 
+    for ($j=0; $j < sizeof($ordenDis); $j++) { 
+        if($ordenDis[$i]==$ordenID[1][$j]){
+            $def=$ordenID[0][$j];
+            array_push($idArray,$ordenID[0][$j]);
+            
+        }
+    }
+}       
+      
+      // var_dump();
+      $num = sizeof($idArray);
+      $s = $num/3;
+      if (!is_int($s)){
+        $s = intval($s);
+        $s = $s+1;
+      }
+      $i=0;
+      echo"<span id='num' hidden>$s</span>";
+      for ($l=0; $l < $s ; $l++) { 
+        echo "<br>
+        
+        <div class='card-deck' id='Ct-$l'>";
+        for ($k=0; $k <3 ; $k++) { 
+          if ($i>=sizeof($idArray)){
+            echo "
+            <div class='card'></div>";
+          }else{
+            $id = $idArray[$i];
+            $g = $o->datoCanchas($id);
+            
+            $Cnombre = $g["nombre"];
+            $tipo = $g["tipo"];
+            $dir = $g["direccion"];
+            // $ubi = $g["ubicacion"];
+            $img = $g["imgen"];//img_brasil.png
+            $caracteristicas = $g["caracteristicas"];
+            echo "
+            <div class='card'>
+              <img class='card-img-top' src='img/canchas/$img' alt='Card image' style='max-height: 300px;width:100%'>
+              <div class='card-body'>
+                <h4 class='card-title'>$Cnombre</h4>
+                <h5 class='card-title'>Tipo: $tipo</h5>
+                <p class='card-text'>Caracteristica: $caracteristicas</p>
+                <p class='card-text'>Dirección: $dir</p>
+                <form action='horas.php' method='post' role='form'>
+                  <button type='submit' class='btn btn-primary' name='btn-b' value='$id'>Ver más</button>
+                </form>
+              </div>
+            </div>
+            ";
+            $i += 1;
+
+          }
+        }
+        echo "</div>";
+      }     
+}
+if(isset($_POST['fut'])){
+    $o = new canchas();//se crea el objeto
+      $f = $o->futbol();// id e cancha mostrar
+      
+     
+      $idArray=array();
+      foreach($f as $cancha){
+        array_push($idArray,$cancha["id_canchas"]);
+      }
+      $num = sizeof($idArray);
+      // var_dump();
+      $s = $num/3;
+      if (!is_int($s)){
+        $s = intval($s);
+        $s = $s+1;
+      }
+      $i=0;
+      echo"<span id='num' hidden>$s</span>";
+      for ($l=0; $l < $s ; $l++) { 
+        echo "<br>
+        <div class='card-deck' id='Ct-$l'>";
+        for ($k=0; $k <3 ; $k++) { 
+          if ($i>=sizeof($idArray)){
+            echo "
+            <div class='card'></div>";
+          }else{
+            $id = $idArray[$i];
+            $g = $o->datoCanchas($id);
+            
+            $Cnombre = $g["nombre"];
+            $tipo = $g["tipo"];
+            $dir = $g["direccion"];
+            // $ubi = $g["ubicacion"];
+            $img = $g["imgen"];//img_brasil.png
+            $caracteristicas = $g["caracteristicas"];
+            echo "
+            <div class='card'>
+              <img class='card-img-top' src='img/canchas/$img' alt='Card image' style='max-height: 300px;width:100%'>
+              <div class='card-body'>
+                <h4 class='card-title'>$Cnombre</h4>
+                <h5 class='card-title'>Tipo: $tipo</h5>
+                <p class='card-text'>Caracteristica: $caracteristicas</p>
+                <p class='card-text'>Dirección: $dir</p>
+                <form action='horas.php' method='post' role='form'>
+                  <button type='submit' class='btn btn-primary' name='btn-b' value='$id'>Ver más</button>
+                </form>
+              </div>
+            </div>
+            ";
+            $i += 1;
+
+          }
+        }
+        echo "</div>";
+      }     
+}
 ?>

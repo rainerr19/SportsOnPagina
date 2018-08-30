@@ -43,7 +43,7 @@ if(!isset($_SESSION)){
               </li>
   
               <li class="nav-item">
-              <a class="nav-link disabled" href="#">Canchas</a>
+              <a class="nav-link" href="canchas.php">Canchas</a>
               </li>
               <?php 
                 if (!isset($_SESSION['nombreUser'])) {

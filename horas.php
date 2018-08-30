@@ -41,7 +41,7 @@ if(!isset($_SESSION)){
                 <a class='nav-link' href="index.php">Inicio</a>
               </li>
               <li class='nav-item active'>
-                <a class='nav-link' href="#">Canchas</a>
+                <a class='nav-link' href="canchas.php">Canchas</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="eventos.php">Eventos</a>
