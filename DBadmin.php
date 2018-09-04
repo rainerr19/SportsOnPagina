@@ -66,6 +66,15 @@ class Admin extends Conexion{
         return $conteo > 0 ? true : false;
         $result->closeCursor();
       }
+      function insertCancha($paga, $name, $tip, $cara, $det, $ubi, $map, $dire, $conta, $cel, $corr, $restr, $ocupa, $fecha, $cali ,$imag){
+        $stmt = "INSERT INTO canchas (paga, nombre, tipo, caracteristicas, detalles, ubicacion, map, direccion, contacto, cel_contacto, correo_contacto, restric, ocupacion, fecha_g, calidad, imgen)
+         VALUES (:pa, :nom, :tip, :cara, :det, :ubi, :ma, :direc, :conta, :cel, :correo, :rest, :ocu, :fech, :cal, :img)";
+        $result = self::$conn->prepare($stmt);
+        $result->execute(array(":pa"=>$paga, ":nom"=>$name, ":tip"=>$tip,":cara"=>$cara, ":det"=>$det, ":ubi"=>$ubi, ":ma"=>$map, ":direc"=>$dire, ":conta"=>$conta, ":cel"=>$cel,":correo"=>$corr,":rest"=>$restr,":ocu"=>$ocupa,":fech"=>$fecha,":cal"=>$cali,":img"=>$imag));//se verifica lo que se inserto
+        $conteo = $result->rowCount();//contar las filas que se seleccionan
+        return $conteo > 0 ? true : false;
+        $result->closeCursor();
+      }
       function eliminarNoticia($id_n){
 
         $stmt = "DELETE FROM noticias WHERE id_noticia = :id";
@@ -84,7 +93,203 @@ class Admin extends Conexion{
         $result->closeCursor();
       }
 }
+function DBsemana( $horadb){    
+    /*formato de hora --> 02-04L--> de 2am hasta 4pm del lunes
+      formato de hora --> *D--> todas las horas del domingo
+      formato de hora --> 02-04L2123M--> de 2am hasta 4pm del lunes y martes a las 9pm
+      y 11pm
+      L --> lunes
+      M --> martes
+      I --> miercoles
+      J --> jueves
+      V --> viernes
+      S --> sabado
+      D --> domingo
+    */
+    $size = strlen ($horadb);
+    $semana=array(
+    "L"=>array(),  
+    "M"=>array(), 
+    "I"=>array(), 
+    "J"=>array(), 
+    "V"=>array(), 
+    "S"=>array(), 
+    "D"=>array()  
+    );
+    $horas=[array(), array(), array(), array(), array(), array(), array()];
+    $d = ["L","M","I","J","V","S","D"];    
+    for ($i = 0; $i <= 6; $i++) {
+        $pos =stripos($horadb, $d[$i]);
+        if($pos){
+            $tem = substr($horadb,0, $pos);
+            $horadb = substr($horadb,$pos+1, $size);
+            $pos2 =stripos($tem, "-");
+            while($pos2) {
+                $value1 = substr($tem, $pos2-2, 2);
+                $value2 = substr($tem, $pos2+1, 2);
+                for($j = $value1; $j <= $value2; $j++){
+                    array_push($horas[$i], intval($j));
+                }
+                //$horadb = substr(,$pos, $size);  elimina el fracmento de string en pos2
+                $tem = substr_replace($tem, '', $pos2-2, 5); 
+                $pos2 =stripos($tem, "-");
+            }
+            $pos3 =stripos($tem, "*");
+            if($pos3 !== false){
+                for($k=0; $k <= 23; $k++){
+                    array_push($horas[$i], $k);
+                }
+            }else{               
+                if (strlen($tem)>0) {
+                    # 
+                    for($j = 0;$j <strlen ($tem); $j+=2){
+                        array_push($horas[$i], intval(substr($tem, $pos2+$j, 2)));
+                    }
+                }
+            }   
+        }
+    }
+    $i=0;
+    foreach( $d as $val ){
+        $semana[$val] = $horas[$i];
+        #var_dump($dia);
+        $i+=1;
+    }
+    //echo $horas[0];
+    //semana--->> array de horas[-,-,-,-]
+    return $semana;
     
+}
+function semanaDB($semana){
+    $str='';
+    $dia = ["L","M","I","J","V","S","D"];
+    foreach( $dia as $val ){
+        $ho =$semana[$val] ;
+        
+        if (count($ho)!=0) {
+            $str=$str.consecutivo($ho).$val;
+        }
+    }
+   //echo $dia;
+    return $str;
+}
+function consecutivo($arr){
+   sort($arr,SORT_NUMERIC);//ordenar
+   $str = "";
+    $sz = count($arr);
+    $n1tem = $arr[0];
+    array_push($arr, $arr[$sz-1]);
+    if($sz<24){
+        for ($i=0; $i < $sz; $i++) {
+            $n2 = $arr[$i+1];
+            $n1 = $arr[$i];
+            if($n2!=$n1+1){
+                if ($n1tem!=$n1){
+                    if ($n1tem+1==$n1) {
+                        if ($n1tem<10){$n1tem ="0$n1tem";}
+                        if ($n1<10){$n1 = "0$n1";}
+                        $str = $str."$n1tem$n1";
+                    }else{
+                        if ($n1tem<10){$n1tem ="0$n1tem";}
+                        if ($n1<10){$n1 ="0$n1";}
+                        $str = $str."$n1tem-$n1";
+                    }
+                }else{
+                    if ($n1<10){$n1 = "0$n1";}
+                    $str = $str.$n1;
+                }
+                $n1tem = $n2;
+            }
+        }
+    }else{
+        $str = $str."*";
+    }
+    return $str;
+}
+function tablaCreator($semBAN,$semBloc,$now){
+    $out=  "<tr class='active success'>
+            <th>Horas</th>";
+    $week=[
+        "L" => ["Lunes","Monday"],
+        "M" => ["Martes","Tuesday"],
+        "I" => ["Miercoles","Wednesday"],
+        "J" => ["Jueves","Thursday"],
+        "V" => ["Viernes","Friday"],
+        "S" => ["Sabado","Saturday"],
+        "D" => ["Domingo","Sunday"]
+    ];
+    
+    date_default_timezone_set("America/Mexico_City");
+    $iDia=0;
+    foreach($week as $d){
+        if($now[0] == $d[1]){
+            $now[0]="$iDia";
+        }
+        $iDia=$iDia+1;
+        $out=$out."<th>".$d[0]."<i style='color:grey;'>".date("-d",strtotime("now ".$d[1]))."</i>"."</th>";
+    }
+    $out=$out."</tr>";
+    for ($i=0; $i < 24 ; $i++) {
+        if ($i<10) {
+            if ($i==9) {
+                $hora ="0$i-".($i+1);
+            }else{
+                $hora ="0$i-0".($i+1);     
+            }                  
+        }else {if($i==23){
+                $hora ="$i-00";
+                }else{
+                    $hora ="$i-".($i+1);
+                }
+        }
+
+        $out=$out."<tr><th>$hora</th>";
+        
+        $dia = ["L","M","I","J","V","S","D"];
+        for($j=0;$j < 7;$j++){
+            $ar =$semBAN[$dia[$j]]; 
+            $ar2 =$semBloc[$dia[$j]]; 
+            //$semBloc
+            if ($i==intval($now[1]) && $j==intval($now[0])){
+                $celda = "<th class='cel-p' id='cell-$i-$j'>En progreso</th>";
+            }else{
+
+                if (count($ar)!=0 && count($ar2)!=0) {
+                    $celda ="<td id='cell-$i-$j' onclick='cellSelec($i,$j)'></td>";
+                    foreach($ar as $v){
+                        if($v==$i){
+                            $celda = "<th class='cel-ban' id='cell-$i-$j'>No habilitado</th>";
+                        }
+                    }
+                    foreach($ar2 as $v2){
+                        if($v2==$i){
+                            $celda = "<th class='cel-busy' id='cell-$i-$j'>ocupado</th>"; 
+                        }
+                    }
+                }else{
+                    $celda ="<td id='cell-$i-$j' onclick='cellSelec($i,$j)'></td>";
+                    if (count($ar)!=0){
+                        foreach($ar as $v){
+                            if($v==$i){
+                                $celda = "<th class='cel-ban' id='cell-$i-$j'>No habilitado</th>";
+                            }
+                        }
+                    }elseif (count($ar2)!=0) {
+                        # code...
+                        foreach($ar2 as $v2){
+                            if($v2==$i){
+                                $celda = "<th class='cel-busy' id='cell-$i-$j'>ocupado</th>";
+                            }
+                        }
+                    }   
+                }
+            }
+            $out=$out.$celda;
+        }//end for
+        $out=$out."</tr>";
+    }   
+    return $out;
+}
     
     if(isset($_POST['btn_editor'])){
         $contra = $_POST['passAdmin'];
@@ -213,7 +418,7 @@ class Admin extends Conexion{
                    </form>
                    </nav>
                    ";
-               }else{
+               }elseif($_POST['agregar']=="Noticias"){
                 $log=TRUE;
                 $editor_form="
                 <h1>Noticias</h1>
@@ -290,6 +495,96 @@ class Admin extends Conexion{
                 </form>
                 <hr>
                 ";
+               }else{
+                $log=TRUE;
+                $ban = DBsemana("");//horrios restringidos
+                $reservado = DBsemana("");
+                $tabla = tablaCreator($ban, $reservado, [' ','-1']);
+                $editor_form="
+                <h1>Escenarios</h1>
+                    <hr>
+                    <form role='form' method='post' action='mensaje.php' enctype='multipart/form-data'>
+                    <div class='form-group'>
+                        <label >Nombre de escenario </label>
+                        <input type='text' class='form-control' placeholder='Nombre' maxlength='45' name='name' title='maximo 45 caracteres' required>
+                    </div>
+                    <div class='form-group'>
+                        <label >Caracteristicas </label>
+                        <input type='text' class='form-control' placeholder='Caracteristicas' maxlength='250' name='cara' title='maximo 45 caracteres' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='Select1'>Paga?</label>
+                        <select class='form-control' id='Select1' name='paga'>
+                            <option>No</option>
+                            <option>Si</option>
+                        </select>
+                    </div>
+                    <div class='form-group'>
+                        <label>Detalles</label>
+                        <textarea class='form-control ckeditor' id='txt_res' name='editor1'></textarea>
+                    </div>
+                    <div class='form-group'>
+                        <label for='Select2'>Tipo</label>
+                        <select class='form-control' id='Select2' name='tipo'>
+                            <option>Futbol</option>
+                            <option>Baloncesto</option>
+                            <option>Mixto</option>
+                            </select>
+                    </div>
+                    <div class='form-group'>
+                        <label >direccion</label>
+                        <input type='text' class='form-control' maxlength='45' name='direccion' required>
+                    </div>
+                        <div class='form-group'>
+                            <label >Ubicacion  (Cordenadas geograficas)</label>
+                            <input type='number' class='form-control' placeholder='Latitud' name='lat' min='-180' max='180' lang='en' step='0.000001' required>
+                            <input type='number' class='form-control' placeholder='Longitud' name='lon' min='-180' max='180' lang='en' step='0.000001' required>
+                        </div>
+                        <div class='form-group'>
+                            <label >link mapa google del escenario</label>
+                            <input type='text' class='form-control' 
+                                placeholder='<iframe src=  allowfullscreen></iframe>'
+                                name='mapa' required>
+                        </div>   
+                        
+                        <div class='form-group'>
+                            <label >encargado</label>
+                            <input type='text' class='form-control' name='encar'>
+                        </div>
+                        <div class='form-group'>
+                            <label >correo</label>
+                            <input type='email' class='form-control' name='correo'>
+                        </div>
+                        <div class='form-group'>
+                            <label>Celular(opcional)</label>
+                            <input type='number' class='form-control' name='cel' placeholder='Celular' min='1000000000'>
+                        </div> 
+                        <div class='form-group'>
+                            <label for='exampleFormControlFile1'>subir imagen del Escenario</label>
+                            <input type='file' class='form-control-file' name='img' required>
+                        </div>
+                        <h4>horario restringido</h4>
+                        <p>(seleccione las hora en las que el escenario no se puede prestar)</p>
+                        <hr>
+                        <div class='form-group table-responsive'>
+                            
+                        <table id='horario' class='table table-bordered table-striped table-condensed'>$tabla</table>
+                      
+                    </div>
+                    <div class='form-group'>
+                        <a class='btn btn-warning' onclick='clearSelec()'>Borrar seleccion<span class='badge' id='c'>0</span></a>
+                        <input type='text' name='ban_dia' id='dia' hidden>
+                        <input type='text' name='ban_hora' id='hora' hidden>
+                    </div>
+                    <hr>		
+                    <div class='form-group'>
+                        <button type='submit' class='btn btn-primary' name='bt_subir_escenario'> Subir a paguina  </button>
+                    </div> 
+                
+                </form>
+                <hr>";
+                //$editor_form= $editor_form." <?php tablaCreator(DBsemana(''), DBsemana(''), [' ','-1'])>";
+            
                }
 
             }else {

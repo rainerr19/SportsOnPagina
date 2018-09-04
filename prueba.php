@@ -56,59 +56,97 @@
 <br>
 <hr>
  <div class="container">
-     <h1>Escenarios deportivos</h1>
-    <div class="card-deck">
-     
-        <div class="card bg-secondary">
-            <img class="card-img-top" src="img/img_brasil.png" alt="Card image" style="max-height: 300px;width:100%">
-            <div class="card-body">
-            <h4 class="card-title">imagen prueba</h4>
-            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-            <a href="#" class="btn btn-primary">See more</a>
-            </div>
+    <h1>Escenarios</h1>
+    <hr>
+    <form role='form' method='post' action='mensaje.php' enctype='multipart/form-data'>
+    <div class='form-group'>
+        <label >Nombre de escenario </label>
+        <input type='text' class='form-control' placeholder='Nombre' maxlength='45' name='name' title='maximo 45 caracteres' required>
+    </div>
+    <div class='form-group'>
+        <label >Caracteristicas </label>
+        <input type='text' class='form-control' placeholder='Caracteristicas' maxlength='250' name='cara' title='maximo 45 caracteres' required>
+    </div>
+    <div class='form-group'>
+        <label for='Select1'>Paga?</label>
+        <select class='form-control' id='Select1' name='paga'>
+            <option>No</option>
+            <option>Si</option>
+        </select>
+    </div>
+    <div class='form-group'>
+        <label>Detalles</label>
+        <textarea class='form-control ckeditor' id='txt_res' name='editor1'></textarea>
+    </div>
+    <div class='form-group'>
+        <label for='Select2'>Tipo</label>
+        <select class='form-control' id='Select2' name='tipo'>
+            <option>Futbol</option>
+            <option>Baloncesto</option>
+            <option>Mixto</option>
+            </select>
+    </div>
+    <div class='form-group'>
+        <label >direccion</label>
+        <input type='text' class='form-control' maxlength='45' name='direccion' required>
+    </div>
+        <div class='form-group'>
+            <label >Ubicacion  (Cordenadas geograficas)</label>
+            <input type='number' class='form-control' placeholder='Latitud' name='lat' min='-180' max='180' lang='en' step='0.000001' required>
+            <input type='number' class='form-control' placeholder='Longitud' name='lon' min='-180' max='180' lang='en' step='0.000001' required>
         </div>
-        <div class="card bg-secondary">
-            <img class="card-img-top" src="img/img_hebreo.jpg" alt="Card image" style="max-height: 300px;width:100%">
-            <div class="card-body">
-            <h4 class="card-title">imagen prueba2</h4>
-            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-            <a href="#" class="btn btn-primary">See more</a>
-            </div>
-        </div>
-        <div class="card bg-secondary">
-            <img class="card-img-top" src="img/ppp.png" alt="Card image" style="max-height: 300px;width:100%">
-            <div class="card-body">
-            <h4 class="card-title">imagen prueba3</h4>
-            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-            <a href="#" class="btn btn-primary">See more</a>
-            </div>
-        </div>
-
+        <div class='form-group'>
+            <label >link mapa google del escenario</label>
+            <input type='text' class='form-control' 
+                placeholder='<iframe src=  allowfullscreen></iframe>'
+                name='mapa' required>
+        </div>   
         
-    </div>
-    <br>
-    <div class='card-deck'>
+        <div class='form-group'>
+            <label >encargado</label>
+            <input type='text' class='form-control' name='encar'>
+        </div>
+        <div class='form-group'>
+            <label >correo</label>
+            <input type='email' class='form-control' name='correo'>
+        </div>
+        <div class='form-group'>
+            <label>Celular(opcional)</label>
+            <input type='number' class='form-control' name='cel' placeholder='Celular' min='1000000000'>
+        </div> 
+        <div class='form-group'>
+            <label for='exampleFormControlFile1'>subir imagen del Escenario</label>
+            <input type='file' class='form-control-file' name='img' required>
+        </div>
+        <h4>horario restringido</h4>
+        <p>(seleccione las hora en las que el escenario no se puede prestar)</p>
+        <hr>
+        <div class="form-group table-responsive">
+            <table id="horario" class="table table-bordered table-striped table-condensed">
+                <?php
+                include 'hora.php';
+                $ban = DBsemana("");//horrios restringidos
+                //$reservado = DBsemana("1011L07-09S07-09D");
+                $reservado = DBsemana("");
+                //date_default_timezone_set("America/Mexico_City");
+                //$actual=[date("l",strtotime("now")),date("H",strtotime("now"))];
+                //var_dump($actual);
+                tablaCreator($ban,$reservado,[" ","-1"]); 
+                ?>
+            </table>
+        </div>
+        <div class='form-group'>
+            <a class="btn btn-warning" onclick='clearSelec()'>Borrar seleccion<span class='badge' id='c'>0</span></a>
+            <input type='text' name='ban_dia' id='dia' hidden>
+            <input type='text' name='ban_hora' id='hora' hidden>
+        </div>
+        <hr>		
+        <div class='form-group'>
+            <button type='submit' class='btn btn-primary' name='bt_subir_escenario'> Subir a paguina  </button>
+        </div> 
      
-        <div class='card bg-secondary'>
-            <img class='card-img-top' src='img/img_hebreo.jpg' alt='Card image' style='max-height: 300px;width:100%'>
-            <div class='card-body'>
-            <h4 class='card-title'>imagen prueba2</h4>
-            <p class='card-text'>Some example text some example text. John Doe is an architect and engineer</p>
-            <a href='#' class='btn btn-primary'>See more</a>
-            </div>
-        </div>
-        <div class='card bg-secondary'>
-            <img class='card-img-top' src='img/ppp.png' alt='Card image' style='max-height: 300px;width:100%'>
-            <div class='card-body'>
-            <h4 class='card-title'>imagen prueba3</h4>
-            <p class='card-text'>Some example text some example text. John Doe is an architect and engineer</p>
-            <a href='#' class='btn btn-primary'>See more</a>
-            </div>
-        </div>
-        <div class='card'>
-        </div>
-
-    </div>
+    </form>
+    <hr>
 </div>
 <hr>
 
@@ -117,6 +155,59 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- <script type="text/javascript" src="ckeditor/ckeditor.js"></script>	 -->
 <script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+<script>
+    //jquery--hover effect
+      $(document).ready(function(){
+        $("td").hover(function(){
+            $(this).addClass("success");
+            }, function(){
+            $(this).removeClass("success");
+        })
+        });
+        // seleccion de una celda javascript
+        var count=0;// global # de seleccion
+        var celda1=[];// global horas seleccionada
+        var celda2=[];// global dias selecionados
+        document.getElementById("dia").value = "";
+        document.getElementById("hora").value = "";
+        function cellSelec(hora,dia) {
+            //var count=document.getElementById("c");
+            count=count+1;
+          
+            var d = ["L","M","I","J","V","S","D"]; 
+            var cel = "cell-" + hora + "-" + dia;
+            document.getElementById(cel).style.background = "#5cb85c";
+            document.getElementById(cel).style.color = "white";
+            document.getElementById(cel).innerHTML="selec";
+            document.getElementById("c").innerHTML = count;
+            celda1.push(hora);
+            celda2.push(dia);
+            document.getElementById("hora").value = celda1;
+            document.getElementById("dia").value = celda2;
+            console.log(celda1);
+            console.log(celda2);
+             //document.getElementById("se").innerHTML = ("horas= " + "cell-" + hora + "-" + d[dia]);
+        }
+        //limppiar seleccion
+        function clearSelec() {
+            count=0;
+            
+            document.getElementById("c").innerHTML = count;
+            document.getElementById("dia").innerHTML = "";
+            document.getElementById("hora").innerHTML = "";
+            for (i = 0; i < celda1.length; i++) {
+                cel = "cell-" + celda1[i] + "-" + celda2[i];
+                document.getElementById(cel).style.background = null;
+                document.getElementById(cel).style.color = null;
+                document.getElementById(cel).innerHTML="";
+                
+            }
+            celda1=[];
+            celda2=[];
+            
+        }
+        
+</script>
 <script>
 $(document).ready(function(){
     $("#buscar").click(function(){

@@ -58,8 +58,8 @@ class canchas extends Conexion{
  // $o = new canchas();//se crea el objeto
 //   $conteo=$o->numCanchas();
 //   $co=$o->datoCanchas();
-function DBsemana( $horadb)
-{    /*formato de hora --> 02-04L--> de 2am hasta 4pm del lunes
+function DBsemana( $horadb){    
+    /*formato de hora --> 02-04L--> de 2am hasta 4pm del lunes
       formato de hora --> *D--> todas las horas del domingo
       formato de hora --> 02-04L2123M--> de 2am hasta 4pm del lunes y martes a las 9pm
       y 11pm
@@ -125,8 +125,8 @@ function DBsemana( $horadb)
     return $semana;
     
 }
-function consecutivo($arr)
-{   sort($arr,SORT_NUMERIC);//ordenar
+function consecutivo($arr){
+   sort($arr,SORT_NUMERIC);//ordenar
    $str = "";
     $sz = count($arr);
     $n1tem = $arr[0];
@@ -158,8 +158,8 @@ function consecutivo($arr)
     }
     return $str;
 }
-function semanaDB($semana)
-{   $str='';
+function semanaDB($semana){
+    $str='';
     $dia = ["L","M","I","J","V","S","D"];
     foreach( $dia as $val ){
         $ho =$semana[$val] ;

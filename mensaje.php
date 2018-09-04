@@ -1,6 +1,6 @@
  <?php
-require 'DBadmin.php';
 if(isset($_POST["bt_subir"])){
+    require 'DBadmin.php';
     
     $error=FALSE;
 
@@ -97,6 +97,7 @@ if(isset($_POST["bt_subir"])){
     
 }
 if(isset($_POST['btn_buscar'])){
+    require 'DBadmin.php';
     $title_del = $_POST['del_title'];
     $admin = new Admin;
     $evento = $admin->getEvento($title_del);
@@ -124,6 +125,7 @@ if(isset($_POST['btn_buscar'])){
 
 
 if(isset($_POST['btn_eliminar'])){
+    require 'DBadmin.php';
     $id_evento = $_POST['id_evento'];
     $arch = $_POST['imagen'];
     $admin = new Admin;
@@ -140,6 +142,7 @@ if(isset($_POST['btn_eliminar'])){
 
 ///////////////////////////Noticias////////////////////////////////////////7777
 if(isset($_POST["bt_subir_new"])){
+    require 'DBadmin.php';
     $error=FALSE;
 
     $resumen = $_POST["editor1"];
@@ -264,6 +267,7 @@ if(isset($_POST["bt_subir_new"])){
 }
 
 if(isset($_POST['btn_buscar_noticia'])){
+    require 'DBadmin.php';
     $title_del = $_POST['del_title'];
     $admin = new Admin;
     $Noticia = $admin->getNoticia($title_del);
@@ -290,6 +294,7 @@ if(isset($_POST['btn_buscar_noticia'])){
 
 
 if(isset($_POST['btn_eliminar_noticia'])){
+    require 'DBadmin.php';
     $id_Noticia = $_POST['id_Noticia'];
      $title_del = $_POST['titulo_del'];
      $admin = new Admin;
@@ -320,4 +325,115 @@ if(isset($_POST['btn_eliminar_noticia'])){
      }else{echo "error en sql";}
 }
 
+//////////////////////////////escenarios ////////////////////////////////////////////////
+if(isset($_POST["bt_subir_escenario"])){
+    
+    $name = $_POST["name"];
+    $paga = $_POST["paga"];
+    $cara = $_POST["cara"];
+    $tipo = $_POST["tipo"];
+    $detalle = $_POST["editor1"];
+    $dire = $_POST["direccion"];
+    $map = $_POST["mapa"];
+    $lat = $_POST["lat"];
+    $lon = $_POST["lon"];
+    if(empty($detalle)){
+        
+        //echo "sin detalles";
+        $detalle= NULL;
+    }
+  
+    while(strlen($lat)<9) {
+        $lat = $lat."0" ;
+        // echo "hola";
+    }
+    while(strlen($lon)<9) {
+        $lon = $lon."0";
+        //echo "hola";
+    }
+    $ubi = $lat+","+$lon;
+
+    $ban_dia = preg_split("/[\s,]+/", $_POST["ban_dia"]);
+    $ban_hora =preg_split("/[\s,]+/", $_POST["ban_hora"]);
+    $ban=array(
+        "L"=>array(),  
+        "M"=>array(), 
+        "I"=>array(), 
+        "J"=>array(), 
+        "V"=>array(), 
+        "S"=>array(), 
+        "D"=>array()  
+        );
+    if(sizeof($ban_dia)>0){
+        for ($i=0; $i < sizeof($ban_dia) ; $i++) { 
+            
+            switch ($ban_dia[$i]) {
+                case "0":
+                    array_push($ban["L"], intval($ban_hora[$i]));                    
+                    break;
+                case "1":
+                    array_push($ban["M"], intval($ban_hora[$i]));                    
+                    break;
+                case "2":
+                    array_push($ban["I"], intval($ban_hora[$i]));                    
+                    break;
+                case "3":
+                    array_push($ban["J"], intval($ban_hora[$i]));                    
+                    break;
+                case "4":
+                    array_push($ban["V"], intval($ban_hora[$i]));                    
+                    break;
+                case "5":
+                    array_push($ban["S"], intval($ban_hora[$i]));                    
+                    break;
+                case "6":
+                    array_push($ban["D"], intval($ban_hora[$i]));                    
+                    break;
+            }
+        }
+    }
+    
+    $conta = $_POST["encar"];
+    if(empty($conta)){
+        $conta= NULL;
+    }
+    $cel = $_POST["cel"];
+    if(empty($cel)){
+        $cel= NULL;
+    }
+    $corr = $_POST["correo"];
+    if(empty($corr)){
+        $corr= NULL;
+    }
+    include 'DBadmin.php';
+    $cancha = new Admin();
+    date_default_timezone_set("America/Mexico_City");    
+    $fecha= date("Y-m-d H:i:s");//fecha de subida
+    $formatos=array('.png','.jpg','.jpeg');
+        
+    $imgEr= FALSE;
+    $file_name=$_FILES["img"]["name"];
+    $file_name_tmp=$_FILES["img"]["tmp_name"];
+    $dir_guardar="img/canchas/$file_name";
+    $dir = substr($file_name,strrpos($file_name,"."));
+    if(in_array($dir,$formatos)){
+        // var_dump($ban_hora);
+        if (move_uploaded_file($file_name_tmp,$dir_guardar)){
+             if($cancha->insertCancha($paga, $name, $tipo, $cara, $detalle, $ubi, $map, $dire, $conta, $cel, $corr, semanaDB($ban), "", $fecha, NULL ,$file_name)){
+                
+                 echo "subido correctamente. <a href='admin.php'>subir nuevo escenario<a>";
+                
+             }else{
+                 echo "error en sql";
+            }
+         }else{echo "error en subida de archivo";}
+        
+    }else{
+        echo "archivo no permitido";
+    }
+
+   
+    //$cancha->insertCancha($paga, $name, $tip, $cara, $det, $ubi, $map, $dire, $conta, $cel, $corr, $restr, $ocupa, $fecha, $cali ,$imag);
+
+}
 ?>
