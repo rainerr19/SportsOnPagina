@@ -48,6 +48,9 @@ if(!isset($_SESSION)){
               <li class="nav-item active">
                 <a class="nav-link" href="eventos.php">Eventos</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="quienes_somos.php">¿Quiénes somos?</a>
+              </li>
               <?php 
                 if (!isset($_SESSION['nombreUser'])) {
                 echo "

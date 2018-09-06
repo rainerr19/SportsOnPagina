@@ -1,3 +1,17 @@
+<?php
+
+if(!isset($_SESSION)){
+    session_start();
+}
+  //enviar post con--> action="recibir.php"
+  if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && !isset($_SESSION["nombreUser"])){
+    $_SESSION["nombreUser"]=$_COOKIE["cookieUserNombre"];
+    //$_SESSION["cel"]=$celular;
+    $_SESSION["email"]=$_COOKIE["cookieUserEmail"];
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>  
@@ -30,7 +44,7 @@
           <div class="collapse navbar-collapse" id="menu1">
             <ul class="navbar-nav">
 
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="index.php">Inicio</a>
               </li>
               
@@ -41,7 +55,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="eventos.php">Eventos</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="quienes_somos.php">¿Quiénes somos?</a>
               </li>
             <?php 
@@ -132,9 +146,11 @@
                 <img class='img-thumbnail' src='img/quien/Muevete.jpeg' style = 'max-height: 300px'>
             </div>
             <div class="col-md-3 col-sm-6">
+            <img class='img-thumbnail' src='img/quien/vivelab.jpeg' style = 'max-height: 300px'>
             </div>
             
           </div>  
+          <br>
     </div>
 </div>
 <footer>
@@ -143,7 +159,7 @@
       <div class="col-md-6">
       <ul class="social">
         <span>Red Social</span>    
-        <li>
+          <li>
               <a href="https://www.facebook.com/Sportsoncol/"><i class="fa fa-facebook fa-4x"></i></a>
           </li>
         

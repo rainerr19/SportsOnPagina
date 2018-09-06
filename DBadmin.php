@@ -528,6 +528,7 @@ function tablaCreator($semBAN,$semBloc,$now){
                         <select class='form-control' id='Select2' name='tipo'>
                             <option>Futbol</option>
                             <option>Baloncesto</option>
+                            <option>Voleibol</option>
                             <option>Mixto</option>
                             </select>
                     </div>

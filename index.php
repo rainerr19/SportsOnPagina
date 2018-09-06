@@ -51,6 +51,9 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               <li class="nav-item">
                 <a class="nav-link" href="eventos.php">Eventos</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="quienes_somos.php">¿Quiénes somos?</a>
+              </li>
             <?php 
             if (!isset($_SESSION['nombreUser'])) {
               echo "
@@ -174,27 +177,8 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
         <span class="sr-only">Next</span>
       </a>
     </div>
-
-    <section class="jumbotron jumbotron1">
-    <div class="container">
-        <h2>¿Quiénes somos?</h2> 
-        <p>
-        Somos una plataforma deportiva que te conecta al mundo por medio del deporte.
-        </p>
-        <h3>Misión</h3> 
-        <p>
-        Fomentar, motivar e incentivar a las personas por medio de nuevas tecnología a hacer deporte y 
-        tener un estilo de vida más saludable.      
-        </p>
-        <h3>Visión</h3> 
-        <p>
-        <strong><i>SportsOn</i></strong> será una red social deportiva de clase mundial orientada a motivar,
-         fomentar e incentivar el deporte de manera sana y activa.       
-        </p>
-        </div>
-    </section>
-    
   <div class="container">
+  <br>
       <h5 class="card-header text-center"> NEWS </h5>
     <?php
         $ob = new noticiasYeventos();//se crea el objeto
@@ -217,18 +201,18 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
               $imgIN = "<!-- <img class='card-img-top' style='height: 16rem;' src='$src'> -->";
               echo "<div class='card text-center'>
               <div class='card-body'>
-              <h3 class='card-title'> $titulo </h5>
-              <p><span class='post-fecha'> $fecha </span> 
-                  <span class='post-autor'><a href='#'>$autor</a></span>
-              </p>
-              <p class='card-text text-justify'>
-                  $res 
-              </p>
-              <form action='noticia.php' method='get' role='form'>
-                  <div class='contenedor-botones'>
-                      <button type='submit' name='btn-leer' value='$i'class='btn btn-success'>Leer mas</button>
-                  </div>
-              </form>
+                <h3 class='card-title'> $titulo </h5>
+                <p><span class='post-fecha'> $fecha </span> 
+                    <span class='post-autor'><a href='#'>$autor</a></span>
+                </p>
+                <p class='card-text text-justify'>
+                    $res 
+                </p>
+                <form action='noticia.php' method='get' role='form'>
+                    <div class='contenedor-botones'>
+                        <button type='submit' name='btn-leer' value='$i'class='btn btn-success'>Leer mas</button>
+                    </div>
+                </form>
   
                 </div> 
               </div>";
@@ -243,37 +227,38 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
   </div>
   <br> -->
   <div class="container">
-    <div class="card text-center">
       <h5 class="card-header">
         Eventos
       </h5>
-      <div class="card-body">
         <?php 
         //$conteo=$ob->numNoticias();//numero de noticias
         $eventosRecientes=$ob->eventosRecientes(3);// numero de eventos a mostrar
-            // var_dump($noticiasRecientes[1]["id_noticia"]);
+        // var_dump($noticiasRecientes[1]["id_noticia"]);
         foreach($eventosRecientes as $evento){
-            $i=$evento["id_evento"];
-            $datos1 = $ob->datoEventos($i);
-            $titulo = $datos1["titulo"];
-            $res = $datos1["resumen"];
-            //$img1 = $datos["imagen1"];
-            //$src = "img\imgNews\ $i \ $img1";
-            //$src =  str_replace(' ', '', $src);
-            //$imgIN = "<!-- <img class='card-img-top' style='height: 16rem;' src='$src'> -->";
-
-            echo "<h5 class='card-title'>$titulo</h5>
+          $i=$evento["id_evento"];
+          $datos1 = $ob->datoEventos($i);
+          $titulo = $datos1["titulo"];
+          $res = $datos1["resumen"];
+          //$img1 = $datos["imagen1"];
+          //$src = "img\imgNews\ $i \ $img1";
+          //$src =  str_replace(' ', '', $src);
+          //$imgIN = "<!-- <img class='card-img-top' style='height: 16rem;' src='$src'> -->";
+          
+          echo "
+          <div class='card text-center'>
+            <div class='card-body'>
+              <h5 class='card-title'>$titulo</h5>
                   <p class='card-text text-justify'>$res</p>
                   <form action='evento.php' method='get' role='form'>
                     <div class='contenedor-botones'>
                         <button type='submit' name='btn-participar' value='$i'class='btn btn-primary'>participar</button>
                     </div>
-                  </form>";
+                  </form>
+            </div>
+          </div>
+                  ";
           }
-        ?>
-        
-      </div>
-    </div>
+        ?>    
   </div>
   <br>
   
@@ -283,16 +268,16 @@ if(isset($_COOKIE["cookieUserEmail"]) && isset($_COOKIE["cookieUserNombre"]) && 
       <div class="col-md-6">
       <ul class="social">
         <span>Red Social</span>    
-          <li>
-              <a href="#"><i class="fa fa-facebook fa-4x"></i></a>
+        <li>
+              <a href="https://www.facebook.com/Sportsoncol/"><i class="fa fa-facebook fa-4x"></i></a>
           </li>
         
           <li>
-              <a href="#"><i class="fa fa-twitter fa-4x"></i></a>
+              <a href="https://twitter.com/Sportsoncol"><i class="fa fa-twitter fa-4x"></i></a>
           </li>
           
           <li>
-              <a href="#"><i class="fa fa-instagram fa-4x"></i></a>
+              <a href="https://www.instagram.com/sportsoncol/"><i class="fa fa-instagram fa-4x"></i></a>
           </li>
         
     </ul>

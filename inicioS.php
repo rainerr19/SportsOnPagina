@@ -45,7 +45,9 @@ if (isset($_SESSION['nombreUser'])) {
             <li class="nav-item">
                 <a class="nav-link" href="eventos.php">Eventos</a>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link" href="quienes_somos.php">¿Quiénes somos?</a>
+              </li> 
             <li class='nav-item'>
                 <a class='nav-link' href='registro.php'>Registro</a>
             </li>
@@ -125,16 +127,16 @@ if (isset($_SESSION['nombreUser'])) {
       <div class="col-md-6">
       <ul class="social">
         <span>Red Social</span>    
-          <li>
-              <a href="#"><i class="fa fa-facebook fa-4x"></i></a>
+        <li>
+              <a href="https://www.facebook.com/Sportsoncol/"><i class="fa fa-facebook fa-4x"></i></a>
           </li>
         
           <li>
-              <a href="#"><i class="fa fa-twitter fa-4x"></i></a>
+              <a href="https://twitter.com/Sportsoncol"><i class="fa fa-twitter fa-4x"></i></a>
           </li>
           
           <li>
-              <a href="#"><i class="fa fa-instagram fa-4x"></i></a>
+              <a href="https://www.instagram.com/sportsoncol/"><i class="fa fa-instagram fa-4x"></i></a>
           </li>
         
     </ul>

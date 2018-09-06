@@ -97,13 +97,59 @@ $detalles=$b["detalles"];
 $tipo = $b["tipo"];
 $dir = $b["direccion"];
 $img = $b["imgen"];//img_brasil.png
+$caracteristicas = $b["caracteristicas"];
+$map = $b["map"];
+$paga = $b["paga"];
 ?>
+<div class="container">
+<br>
+    <h1>Horario de escenario <?php print $Cnombre;?></h1>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <img class='img-thumbnail' src='img/canchas/<?php echo $img ?>' style = 'max-height: 420px'>
+
+        </div>
+        <div class="col-md-4">
+            <h3>Descripción de escenario</h3>
+            <hr>
+            <p>Tipo: <?php echo $tipo;?></p>
+            <p><?php echo $caracteristicas;?></p>
+            <?php 
+            if ($paga) {
+                echo "<p>Paga: Si</p>";
+            }else{
+                echo "<p>Paga: No</p>";
+            }
+            if (isset($detalles)) {
+                echo "Nota: $detalles";
+            }
+            ?>
+       
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Ubicación</h3>
+            <hr>
+            <?php echo $map ?>
+            <br>
+            <h5><b>Dirección: </b><?php echo $dir  ?> </h5>
+        </div>
+        <div class="col-lg-6">
+       </div>
+
+    </div>
+
+</div>
+<br>
     <div class="jumbotron">
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
 
-                    <h1>Horario de Cancha <?php print $Cnombre;?></h1>
+                    <h1>Horario de la Cancha</h1>
                     <h4>
                         <?php
                     date_default_timezone_set("America/Mexico_City");
@@ -165,16 +211,16 @@ $img = $b["imgen"];//img_brasil.png
       <div class="col-md-6">
       <ul class="social">
         <span>Red Social</span>    
-          <li>
-              <a href="#"><i class="fa fa-facebook fa-4x"></i></a>
+        <li>
+              <a href="https://www.facebook.com/Sportsoncol/"><i class="fa fa-facebook fa-4x"></i></a>
           </li>
         
           <li>
-              <a href="#"><i class="fa fa-twitter fa-4x"></i></a>
+              <a href="https://twitter.com/Sportsoncol"><i class="fa fa-twitter fa-4x"></i></a>
           </li>
           
           <li>
-              <a href="#"><i class="fa fa-instagram fa-4x"></i></a>
+              <a href="https://www.instagram.com/sportsoncol/"><i class="fa fa-instagram fa-4x"></i></a>
           </li>
         
     </ul>
@@ -201,14 +247,14 @@ $img = $b["imgen"];//img_brasil.png
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-    //jquery--hover effect
-      $(document).ready(function(){
-        $("td").hover(function(){
-            $(this).addClass("success");
-            }, function(){
-            $(this).removeClass("success");
-        })
-        });
+    // //jquery--hover effect
+    //   $(document).ready(function(){
+    //     $("td").hover(function(){
+    //         $(this).addClass("success");
+    //         }, function(){
+    //         $(this).removeClass("success");
+    //     })
+    //     });
         //actualizar pagina
         var cid = '<?php echo $idCancha;?>';
         $("#update").click(function() {
@@ -236,7 +282,7 @@ $img = $b["imgen"];//img_brasil.png
                 }
             var conftxt=" Confirmar prestamo"+conf;
             if (confirm(conftxt)) {
-                txt = "ajax";
+                txt = "No se puede prestar en el momento";
             } else {
                 txt = "You pressed Cancel!";
             }

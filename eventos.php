@@ -20,7 +20,7 @@ if(!isset($_SESSION)){
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="img/sprtON_icon.ico">
-    <title>Noticias SportsOn </title>
+    <title>Eventos SportsOn </title>
   </head>
   <body style='background-color: whitesmoke;'>
   
@@ -48,6 +48,9 @@ if(!isset($_SESSION)){
 
               <li class="nav-item active">
                 <a class="nav-link" href="#">Eventos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="quienes_somos.php">¿Quiénes somos?</a>
               </li>
               <?php 
                 if (!isset($_SESSION['nombreUser'])) {
